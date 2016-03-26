@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+	<changeSet id="create schema" author="abdulrazak">
+		<sqlFile path="productsql/schema.sql" encoding="utf8" dbms="postgresql"
+			splitStatements="false" relativeToChangelogFile="false" />
+	</changeSet>
+	<changeSet id="Product-one" author="abdulrazak">
+		<sqlFile path="productsql/Product1.sql" encoding="utf8" dbms="postgresql"
+			splitStatements="false" relativeToChangelogFile="false" />
+	</changeSet>
+
+	<changeSet id="Product-Two" author="abdulrazak">
+		<sqlFile path="productsql/Product2.sql" encoding="utf8" dbms="postgresql"
+			splitStatements="false" relativeToChangelogFile="false" />
+	</changeSet>
+
+	<changeSet id="Product-Three" author="abdulrazak">
+		<sqlFile path="productsql/Product3.sql" encoding="utf8" dbms="postgresql"
+			splitStatements="false" relativeToChangelogFile="false" />
+	</changeSet>
+
+	<changeSet id="Product-Four" author="abdulrazak">
+		<sqlFile path="productsql/Product4.sql" encoding="utf8" dbms="postgresql"
+			splitStatements="false" relativeToChangelogFile="false" />
+	</changeSet>
+
+	<changeSet id="Product-Five" author="abdulrazak">
+		<sqlFile path="productsql/Product5.sql" encoding="utf8" dbms="postgresql"
+			splitStatements="false" relativeToChangelogFile="false" />
+	</changeSet>
+
+	<changeSet id="Product-Six" author="abdulrazak">
+		<sqlFile path="productsql/Product6.sql" encoding="utf8" dbms="postgresql"
+			splitStatements="false" relativeToChangelogFile="false" />
+	</changeSet>
+
+	<changeSet id="Product-Seven" author="abdulrazak">
+		<sqlFile path="productsql/Product7.sql" encoding="utf8" dbms="postgresql"
+			splitStatements="false" relativeToChangelogFile="false" />
+	</changeSet>
+
+	<changeSet id="Product-Eight" author="abdulrazak">
+		<sqlFile path="productsql/Product8.sql" encoding="utf8" dbms="postgresql"
+			splitStatements="false" relativeToChangelogFile="false" />
+	</changeSet>
+
+	<changeSet id="Product-Nine" author="abdulrazak">
+		<sqlFile path="productsql/Product9.sql" encoding="utf8" dbms="postgresql"
+			splitStatements="false" relativeToChangelogFile="false" />
+	</changeSet>
+
+	<changeSet id="Product-Ten" author="abdulrazak">
+		<sqlFile path="productsql/Product10.sql" encoding="utf8" dbms="postgresql"
+			splitStatements="false" relativeToChangelogFile="false" />
+	</changeSet>
+
+</databaseChangeLog>
