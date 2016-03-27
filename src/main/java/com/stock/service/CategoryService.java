@@ -13,4 +13,7 @@ public interface CategoryService {
     
 	List<CategoryType> findByProduct(Product product);
 
+	CategoryType findByProductAndCategoryType(Long productId,String categorytype);
+	
+	int updateStockAndPrice(Long categoryid,int quantity,Double price);
 }
