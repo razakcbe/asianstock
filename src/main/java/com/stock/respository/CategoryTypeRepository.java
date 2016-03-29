@@ -6,10 +6,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.stock.entity.CategoryType;
 import com.stock.entity.Product;
 
+@Transactional
 public interface CategoryTypeRepository extends JpaRepository<CategoryType, Integer>{
 	
 public List<CategoryType> findByProduct(Product productId);
