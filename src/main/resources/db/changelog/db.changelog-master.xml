@@ -74,10 +74,20 @@
 		]]>
 		</sql>
 	</changeSet>
-		<changeSet id="updatePrice" author="abdulrazak">
+	<changeSet id="updatePrice" author="abdulrazak">
 		<sql>
 		<![CDATA[
 		update category_type set price = 1200;
+		]]>
+		</sql>
+	</changeSet>
+	<changeSet id="ImageURL" author="akabdulrazak">
+		<addColumn tableName="category_type">
+			<column name="imageurl" type="varchar"></column>
+		</addColumn>
+			<sql>
+		<![CDATA[
+		update category_type set imageurl = 'https://s3-ap-southeast-1.amazonaws.com/civil247-gallery/2647d62a3f104a41a98254ba8abd0f3f';
 		]]>
 		</sql>
 	</changeSet>
