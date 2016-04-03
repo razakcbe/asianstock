@@ -63,4 +63,11 @@ public class ProductController {
 	public List<CategoryType> fetchCategoryByProduct() {
 		return categoryServiceImpl.findLastUpdatedCategoryType();
 	}
+	
+	@RequestMapping(value = "/category/{code}/{type}", method = RequestMethod.GET)
+	public CategoryType fetchCategoryByType(@PathVariable String code,@PathVariable String type) {
+		Product product = productService.findByCode(code);
+		CategoryType cate = categoryServiceImpl.findByProductAndCategoryType(product.getId(),type);
+		return cate;
+	}
 }

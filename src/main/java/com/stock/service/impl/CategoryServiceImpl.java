@@ -50,6 +50,9 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public CategoryType findByProductAndCategoryType(Long productId, String categorytype) {
 		CategoryType type = cateRepository.findByProductAndCategoryType(productId, categorytype);
+		Double vatAmount = StockUtils.calculateNonVatFromMRP(type.getPrice(), new BigDecimal(type.getVatPercentage()));
+		type.setVatAmount(vatAmount);
+		type.setNonVatAmount(type.getPrice()- vatAmount);
 		return type;
 	}
 
@@ -61,7 +64,11 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public List<CategoryType> findLastUpdatedCategoryType() {
 		List<CategoryType> categoryList = cateRepository.findLastUpdatedCategoryType();
+		for(CategoryType cy : categoryList){
+			Double vatAmount = StockUtils.calculateNonVatFromMRP(cy.getPrice(), new BigDecimal(cy.getVatPercentage()));
+			cy.setVatAmount(vatAmount);
+			cy.setNonVatAmount(cy.getPrice()- vatAmount);
+		}
 		return categoryList;
 	}
-
 }
