@@ -58,4 +58,10 @@ public class CategoryServiceImpl implements CategoryService {
 		return cateRepository.updateStockAndPrice(categoryid, quantity, price);
 	}
 
+	@Override
+	public List<CategoryType> findLastUpdatedCategoryType() {
+		List<CategoryType> categoryList = cateRepository.findLastUpdatedCategoryType();
+		return categoryList;
+	}
+
 }

@@ -18,7 +18,7 @@ public class AsianstockApplication extends SpringBootServletInitializer{
 
 	@Autowired
 	LiquibaseProperties properties;
-		
+
 	public static void main(String[] args) {
 		SpringApplication.run(AsianstockApplication.class, args);
 	}

@@ -58,4 +58,9 @@ public class ProductController {
 		categoryServiceImpl.updateStockAndPrice(cate.getId(), categorytype.getQuantity(), categorytype.getPrice());
 		return cate;
 	}
+	
+	@RequestMapping(value = "/category/lastupdated", method = RequestMethod.GET)
+	public List<CategoryType> fetchCategoryByProduct() {
+		return categoryServiceImpl.findLastUpdatedCategoryType();
+	}
 }

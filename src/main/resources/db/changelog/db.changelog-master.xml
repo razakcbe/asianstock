@@ -91,4 +91,14 @@
 		]]>
 		</sql>
 	</changeSet>
+	<changeSet id="addlastupdatetime" author="abdulrazak">
+		<addColumn tableName="category_type">
+			<column name="lastupdatetime" type="timestamp" />
+		</addColumn>
+		<sql>
+		<![CDATA[
+		update category_type set lastupdatetime = now();
+		]]>
+		</sql>
+	</changeSet>
 </databaseChangeLog>

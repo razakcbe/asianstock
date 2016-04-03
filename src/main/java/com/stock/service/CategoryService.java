@@ -16,4 +16,6 @@ public interface CategoryService {
 	CategoryType findByProductAndCategoryType(Long productId,String categorytype);
 	
 	int updateStockAndPrice(Long categoryid,int quantity,Double price);
+	
+	List<CategoryType> findLastUpdatedCategoryType();
 }

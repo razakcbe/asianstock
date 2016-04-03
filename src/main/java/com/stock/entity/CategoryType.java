@@ -1,5 +1,7 @@
 package com.stock.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,8 +14,6 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.envers.Audited;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Audited
 public class CategoryType {
@@ -24,7 +24,6 @@ public class CategoryType {
 	
 	@OneToOne
 	@JoinColumn(name="product_id")
-	@JsonIgnore
 	private Product product;
 	
 	@Column
@@ -45,6 +44,13 @@ public class CategoryType {
 	
 	@Column(name="vatpercentage")
 	private String vatPercentage;
+	
+	@Column(name="lastupdatetime")
+	private Date lastUpdateTime;
+	
+	@Column(name="imageurl")
+	private String imageUrl;
+	
 	
 	public CategoryType() {
 		super();
@@ -112,5 +118,21 @@ public class CategoryType {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+	public Date getLastUpdateTime() {
+		return lastUpdateTime;
+	}
+
+	public void setLastUpdateTime(Date lastUpdateTime) {
+		this.lastUpdateTime = lastUpdateTime;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 }
