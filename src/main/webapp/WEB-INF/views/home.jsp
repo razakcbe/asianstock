@@ -22,7 +22,8 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 	<style type="text/css" id="enject"></style>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+	<script type="text/javascript" src="angular.js"></script>
+	<script type="text/javascript" src="angular-route.js"></script>
 	<script type="text/javascript" src="scripts.js"></script>
   </head>
 <body ng-app="paintProducts">
@@ -40,13 +41,11 @@
 	<span class="icon-bar"></span>
 </a>
   <div class="navbar-inner" ng-controller="productController">
-    <a class="brand" href="home.html"><img src="themes/images/logo.png" alt="Bootsshop"/></a>
-		<form class="form-inline navbar-search" method="post" action="products.html" >
+    <a class="brand" href="home.jsp"><img src="themes/images/logo.png" alt="Bootsshop"/></a>
 		<input id="srchFld" class="srchTxt" type="text" />
 		<select class="srchTxt" ng-options="product.name +'-'+product.code for product in products" ng-model="selected" ng-change="dropboxitemselected()">
 		</select>
-		<button type="submit" id="submitButton" class="btn btn-primary">Go</button>
-    </form>
+		<a ui-sref="" role="button" ><span class="btn btn-primary">Go</span></a>
     <ul id="topMenu" class="nav pull-right">
 	 <li class=""><a href="">Specials Offer</a></li>
 	 <li class=""><a href="">Delivery</a></li>
@@ -113,6 +112,7 @@
 		<br/>
 	</div>
 <!-- Sidebar end=============================================== -->
+<script type="text/ng-template" id="mainpage">
 <div class="span9">		
 			<div class="well well-small" ng-controller="categoryLastUpdatedController">
 			<h4>Last Updated Products <small class="pull-right"></small></h4>
@@ -124,11 +124,11 @@
 			  <li class="span3" ng-repeat="category in categories">
 				  <div class="thumbnail">
 				  <i class="tag"></i>
-					<a href="product_details.html"><img src="defaultpaint.jpg" alt=""></a>
+					<a ng-click="viewproduct(category.product.code,category.type)"><img src="defaultpaint.jpg" alt=""></a>
 					<div class="caption">
 					  <h5>{{category.product.name}}</h5>
 					  <small>{{category.product.code}} - {{category.type}}</small>
-					  <h4><a class="btn" ng-click="viewproduct(category.product.code,category.type)"  href="product_details.html">VIEW</a> <span class="pull-right">&#8377;{{category.price}}</span></h4>
+					  <h4><a class="btn" ng-click="viewproduct(category.product.code,category.type)" >VIEW</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-primary" href="#">&#8377;{{category.price}}</a></h4>
 					</div>
 				  </div>
 				</li>
@@ -138,83 +138,128 @@
 			  </div>
 			  </div>
 		</div>
-		<h4>Latest Products </h4>
-			  <ul class="thumbnails">
-				<li class="span3">
-				  <div class="thumbnail">
-					<a  href="product_details.html"><img src="themes/images/products/6.jpg" alt=""/></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					  <p> 
-						Lorem Ipsum is simply dummy text. 
-					  </p>
-					 
-					  <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
-					</div>
-				  </div>
-				</li>
-				<li class="span3">
-				  <div class="thumbnail">
-					<a  href="product_details.html"><img src="themes/images/products/7.jpg" alt=""/></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					  <p> 
-						Lorem Ipsum is simply dummy text. 
-					  </p>
-					 <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
-					</div>
-				  </div>
-				</li>
-				<li class="span3">
-				  <div class="thumbnail">
-					<a  href="product_details.html"><img src="themes/images/products/8.jpg" alt=""/></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					  <p> 
-						Lorem Ipsum is simply dummy text. 
-					  </p>
-					   <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
-					</div>
-				  </div>
-				</li>
-				<li class="span3">
-				  <div class="thumbnail">
-					<a  href="product_details.html"><img src="themes/images/products/9.jpg" alt=""/></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					  <p> 
-						Lorem Ipsum is simply dummy text. 
-					  </p>
-					  <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
-					</div>
-				  </div>
-				</li>
-				<li class="span3">
-				  <div class="thumbnail">
-					<a  href="product_details.html"><img src="themes/images/products/10.jpg" alt=""/></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					  <p> 
-						Lorem Ipsum is simply dummy text. 
-					  </p>
-					  <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
-					</div>
-				  </div>
-				</li>
-				<li class="span3">
-				  <div class="thumbnail">
-					<a  href="product_details.html"><img src="themes/images/products/11.jpg" alt=""/></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					  <p> 
-						Lorem Ipsum is simply dummy text. 
-					  </p>
-					   <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
-					</div>
-				  </div>
-				</li>
-			  </ul>	
 		</div>
+		</script>
+		<script type="text/ng-template" id="productpage">
+	<div class="span9">
+    <ul class="breadcrumb">
+		<li><a href="home.jsp">Home</a> <span class="divider">/</span></li>
+		<li class="active">Products Name</li>
+    </ul>
+	<h3> Products Name <small class="pull-right"> 40 products are available </small></h3>	
+	<hr class="soft"/>	  
+<div id="myTab" class="pull-right">
+ <a href="#listView" data-toggle="tab"><span class="btn btn-large"><i class="icon-list"></i></span></a>
+ <a href="#blockView" data-toggle="tab"><span class="btn btn-large btn-primary"><i class="icon-th-large"></i></span></a>
+</div>
+<br class="clr"/>
+<div class="tab-content">
+	<div class="tab-pane" id="listView" ng-controller="categoriesController">
+		<div ng-repeat="category in categories">
+		<div class="row">	  
+			<div class="span2">
+				<img src="defaultpaint.jpg" alt=""/>
+			</div>
+			<div class="span4">
+				<h3>{{category.type}}</h3>				
+				<hr class="soft"/>
+				<h5>{{category.product.name}}</h5>
+				<p>
+				{{category.product.code}} - {{category.type}}
+				</p>
+			</div>
+			<div class="span3 alignR">
+			<h3>&#8377;{{category.price}}</h3>
+			 <a href="product_details.html" class="btn btn-large btn-primary"> Update <i class=" icon-shopping-cart"></i></a>
+			  <a ng-click="viewproduct(category.product.code,category.type)" class="btn btn-large">View<i class="icon-zoom-in"></i></a>
+			</div>
+		</div>
+		</div>
+		<hr class="soft"/>
+	</div>
+
+	<div class="tab-pane  active" id="blockView" ng-controller="categoriesController">
+		<ul class="thumbnails">
+		
+		<li class="span3" ng-repeat="category in categories">
+			  <div class="thumbnail">
+				<a href="product_details.html"><img src="defaultpaint.jpg" alt=""/></a>
+				<div class="caption">
+				  <h5>{{category.product.name}}</h5>
+				  <p> 
+					{{category.product.code}} - {{category.type}}
+				  </p>
+				   <h4 style="text-align:center"><a class="btn" ng-click="viewproduct(category.product.code,category.type)"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Update <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&#8377;{{category.price}}</a></h4>
+				</div>
+			  </div>
+			</li>
+		  </ul>
+	<hr class="soft"/>
+	</div>
+</div>
+			<br class="clr"/>
+</div>
+</script>
+<script type="text/ng-template" id ="viewproduct">
+<div class="span9">
+    <ul class="breadcrumb">
+    <li><a href="home.jsp">Home</a> <span class="divider">/</span></li>
+    <li><a href="#/products">Products</a> <span class="divider">/</span></li>
+    <li class="active">product Details</li>
+    </ul>	
+	<div class="row" ng-controller="categoryTypeController">	  
+			<div id="gallery" class="span3">
+            <a href="defaultpaint.jpg" title="Fujifilm FinePix S2950 Digital Camera">
+				<img src="defaultpaint.jpg" style="width:100%" alt="Fujifilm FinePix S2950 Digital Camera"/>
+            </a>
+			</div>
+			<div class="span6">
+				<h3>{{category.product.name}}</h3>
+				<h5>{{category.product.code}} -  {{category.type}}</h5>
+				<hr class="soft"/>
+				<form class="form-horizontal qtyFrm">
+				  <div class="control-group">
+					<label class="control-label"><span>&#8377;{{category.price}}</span></label>
+				  </div>
+				</form>
+				
+				<hr class="soft"/>
+				<h4>{{category.quantity}} items in stock</h4>
+			</div>
+			
+			<div class="span9">
+            <div id="myTabContent" class="tab-content">
+              <div class="tab-pane fade active in" id="home">
+			  <h4>Product Information</h4>
+                <table class="table table-bordered">
+				<tbody>
+				<tr class="techSpecRow"><th colspan="2">Product Details</th></tr>
+				<tr class="techSpecRow"><td class="techSpecTD1">Name: </td><td class="techSpecTD2">{{category.product.name}}</td></tr>
+				<tr class="techSpecRow"><td class="techSpecTD1">Code:</td><td class="techSpecTD2">{{category.product.code}}</td></tr>
+				<tr class="techSpecRow"><td class="techSpecTD1">Variant type:</td><td class="techSpecTD2">{{category.type}}</td></tr>
+				<tr class="techSpecRow"><td class="techSpecTD1">Quantity:</td><td class="techSpecTD2">{{category.quantity}}</td></tr>
+				<tr class="techSpecRow"><td class="techSpecTD1">Price(Exclusive VAT):</td><td class="techSpecTD2">&#8377;{{category.nonVatAmount | number:2}}</td></tr>
+				<tr class="techSpecRow"><td class="techSpecTD1">VAT:</td><td class="techSpecTD2">&#8377;{{category.vatAmount | number:2}}</td></tr>
+				<tr class="techSpecRow"><td class="techSpecTD1">MRP:</td><td class="techSpecTD2">&#8377;{{category.price}}</td></tr>
+				</tbody>
+				</table>
+              </div>
+		<div class="tab-pane fade" id="profile">
+		<div id="myTab" class="pull-right">
+		 <a href="#listView" data-toggle="tab"><span class="btn btn-large"><i class="icon-list"></i></span></a>
+		 <a href="#blockView" data-toggle="tab"><span class="btn btn-large btn-primary"><i class="icon-th-large"></i></span></a>
+		</div>
+		<br class="clr"/>
+		<hr class="soft"/>
+				<br class="clr">
+					 </div>
+		</div>
+          </div>
+
+	</div>
+</div>
+</script>
+		<div ng-view></div>
 		</div>
 	</div>
 </div>

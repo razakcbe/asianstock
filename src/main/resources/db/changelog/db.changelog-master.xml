@@ -85,7 +85,7 @@
 		<addColumn tableName="category_type">
 			<column name="imageurl" type="varchar"></column>
 		</addColumn>
-			<sql>
+		<sql>
 		<![CDATA[
 		update category_type set imageurl = 'https://s3-ap-southeast-1.amazonaws.com/civil247-gallery/2647d62a3f104a41a98254ba8abd0f3f';
 		]]>
@@ -98,6 +98,16 @@
 		<sql>
 		<![CDATA[
 		update category_type set lastupdatetime = now();
+		]]>
+		</sql>
+	</changeSet>
+
+	<changeSet id="updatenocodeproducts" author="abdulrazak">
+		<sql>
+		<![CDATA[
+		update product set code = 'CODE1' where id = -11;
+		update product set code = 'CODE2' where id = -12;
+		update product set code = 'CODE3' where id = -13;
 		]]>
 		</sql>
 	</changeSet>

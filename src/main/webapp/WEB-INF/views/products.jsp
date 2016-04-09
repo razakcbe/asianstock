@@ -22,7 +22,8 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 	<style type="text/css" id="enject"></style>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+	<script type="text/javascript" src="angular.js"></script>
+	<script type="text/javascript" src="angular-route.js"></script>
 	<script type="text/javascript" src="scripts.js"></script>
   </head>
 <body ng-app="paintProducts">
@@ -41,13 +42,10 @@
 </a>
   <div class="navbar-inner" ng-controller="productController">
     <a class="brand" href="home.html"><img src="themes/images/logo.png" alt="Bootsshop"/></a>
-		<form class="form-inline navbar-search" method="get" action="products.html?SE20" >
 		<input id="srchFld" class="srchTxt" type="text" />
-		  <select class="srchTxt">
-			<option ng-repeat="product in products" ng-click="dropboxitemselected">{{product.name}} - {{product.code}}</option>
-		</select> 
-		  <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
-    </form>
+		<select class="srchTxt" ng-options="product.name +'-'+product.code for product in products" ng-model="selected" ng-change="dropboxitemselected()">
+		</select>
+		<a href="#/product" role="button" ><span class="btn btn-primary">Go</span></a>
     <ul id="topMenu" class="nav pull-right">
 	 <li class=""><a href="">Specials Offer</a></li>
 	 <li class=""><a href="">Delivery</a></li>
@@ -127,7 +125,7 @@
 </div>
 <br class="clr"/>
 <div class="tab-content">
-	<div class="tab-pane" id="listView" ng-controller="productController">
+	<div class="tab-pane" id="listView" ng-controller="categoriesController">
 		<div ng-repeat="category in categories">
 		<div class="row">	  
 			<div class="span2">
@@ -151,7 +149,7 @@
 		<hr class="soft"/>
 	</div>
 
-	<div class="tab-pane  active" id="blockView" ng-controller="productController">
+	<div class="tab-pane  active" id="blockView" ng-controller="categoriesController">
 		<ul class="thumbnails">
 		
 		<li class="span3" ng-repeat="category in categories">
@@ -172,6 +170,7 @@
 </div>
 			<br class="clr"/>
 </div>
+<div ng-view></div>
 </div>
 </div>
 </div>
