@@ -1,5 +1,3 @@
-CREATE DATABASE d4qdk17hphrrf6;
-
 CREATE TABLE public.product
 (
   id bigint NOT NULL,
