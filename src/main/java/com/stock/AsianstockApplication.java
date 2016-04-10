@@ -9,10 +9,12 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan
+@EnableWebMvc
 @EnableConfigurationProperties(LiquibaseProperties.class)
 public class AsianstockApplication extends SpringBootServletInitializer{
 

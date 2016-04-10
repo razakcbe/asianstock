@@ -41,7 +41,7 @@
 	<span class="icon-bar"></span>
 </a>
   <div class="navbar-inner" ng-controller="productController">
-    <a class="brand" href="home.jsp"><img src="themes/images/logo.png" alt="Bootsshop"/></a>
+    <a class="brand" href="#/products"><img src="themes/images/logo.png" alt="Bootsshop"/></a>
 		<input id="srchFld" class="srchTxt" type="text" />
 		<select class="srchTxt" ng-options="product.name +'-'+product.code for product in products" ng-model="selected" ng-change="dropboxitemselected()">
 		</select>
@@ -143,18 +143,18 @@
 		<script type="text/ng-template" id="productpage">
 	<div class="span9">
     <ul class="breadcrumb">
-		<li><a href="home.jsp">Home</a> <span class="divider">/</span></li>
+		<li><a href="#/products">Home</a> <span class="divider">/</span></li>
 		<li class="active">Products Name</li>
-    </ul>
-	<h3> Products Name <small class="pull-right"> 40 products are available </small></h3>	
-	<hr class="soft"/>	  
-<div id="myTab" class="pull-right">
- <a href="#listView" data-toggle="tab"><span class="btn btn-large"><i class="icon-list"></i></span></a>
- <a href="#blockView" data-toggle="tab"><span class="btn btn-large btn-primary"><i class="icon-th-large"></i></span></a>
-</div>
+    </ul>  
+ <!-- <div id="myTab" class="pull-right">
+ <a href="#" data-toggle="tab"><span class="btn btn-large"><i class="icon-list"></i></span></a>
+ <a href="#" data-toggle="tab"><span class="btn btn-large btn-primary"><i class="icon-th-large"></i></span></a>
+</div> -->
 <br class="clr"/>
-<div class="tab-content">
-	<div class="tab-pane" id="listView" ng-controller="categoriesController">
+<div class="tab-content" ng-controller="categoriesController">
+<h3> Products Name <small class="pull-right"> {{categories.length}} products are available </small></h3>	
+	<hr class="soft"/>	
+	<div class="tab-pane" id="listView">
 		<div ng-repeat="category in categories">
 		<div class="row">	  
 			<div class="span2">
@@ -178,7 +178,7 @@
 		<hr class="soft"/>
 	</div>
 
-	<div class="tab-pane  active" id="blockView" ng-controller="categoriesController">
+	<div class="tab-pane  active" id="blockView">
 		<ul class="thumbnails">
 		
 		<li class="span3" ng-repeat="category in categories">
@@ -189,7 +189,7 @@
 				  <p> 
 					{{category.product.code}} - {{category.type}}
 				  </p>
-				   <h4 style="text-align:center"><a class="btn" ng-click="viewproduct(category.product.code,category.type)"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Update <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&#8377;{{category.price}}</a></h4>
+				   <h4 style="text-align:center"><a class="btn" ng-click="viewproduct(category.product.code,category.type)"> <i class="icon-zoom-in"></i></a> <a class="btn" ng-click="updateproduct(category.product.code,category.type)">Update <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&#8377;{{category.price}}</a></h4>
 				</div>
 			  </div>
 			</li>
@@ -203,14 +203,14 @@
 <script type="text/ng-template" id ="viewproduct">
 <div class="span9">
     <ul class="breadcrumb">
-    <li><a href="home.jsp">Home</a> <span class="divider">/</span></li>
+    <li><a href="#/products">Home</a> <span class="divider">/</span></li>
     <li><a href="#/products">Products</a> <span class="divider">/</span></li>
     <li class="active">product Details</li>
-    </ul>	
+    </ul>
 	<div class="row" ng-controller="categoryTypeController">	  
 			<div id="gallery" class="span3">
-            <a href="defaultpaint.jpg" title="Fujifilm FinePix S2950 Digital Camera">
-				<img src="defaultpaint.jpg" style="width:100%" alt="Fujifilm FinePix S2950 Digital Camera"/>
+            <a href="defaultpaint.jpg" title="Asian Paint">
+				<img src="defaultpaint.jpg" style="width:100%" alt="Asian Paint"/>
             </a>
 			</div>
 			<div class="span6">
@@ -259,6 +259,71 @@
 	</div>
 </div>
 </script>
+<script type="text/ng-template" id ="updateproduct">
+	<div class="span9">
+    <ul class="breadcrumb">
+		<li><a href="#/products">Home</a> <span class="divider">/</span></li>
+		<li class="active">Update Product Info</li>
+    </ul>
+	<h3> Registration</h3>	
+	<div class="well" ng-controller="categoryTypeController">
+	<form class="form-horizontal" >
+		<h4>Update Product Stock Info</h4>
+		<div class="control-group">
+		<label class="control-label">Image <sup>*</sup></label>
+		<div class="controls">
+		 <div id="gallery" class="span3">
+            <a href="defaultpaint.jpg" title="Asian Paint">
+				<img src="defaultpaint.jpg" style="width:100%;height:30%"  alt="Asian Paint"/>
+            </a>
+			</div>
+		</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="inputproductname">Product name <sup>*</sup></label>
+			<div class="controls">
+			  <input type="text" readonly style="width: 400px;" id="inputproductname" ng-model="category.product.name" value={{category.product.name}}>
+			</div>
+		 </div>
+		 <div class="control-group">
+			<label class="control-label" for="inputproductcode">Product code <sup>*</sup></label>
+			<div class="controls">
+			  <input type="text" readonly id="inputproductcode" ng-model="category.product.code" value={{category.product.code}}>
+			</div>
+		 </div>
+		<div class="control-group">
+		<label class="control-label" for="inputvariant">Variant type<sup>*</sup></label>
+		<div class="controls">
+		  <input type="text" id="inputvariant" readonly ng-model="category.type" value={{category.type}}>
+		</div>
+	  </div>	  
+	<div class="control-group">
+		<label class="control-label" for="inputquantity">Quantity Available <sup>*</sup></label>
+		<div class="controls">
+		  <input type="text" id="inputquantity" ng-model="category.quantity" value={{category.quantity}}>
+		</div>
+	  </div>	  
+		<div class="control-group">
+		<label class="control-label" for="inputprice" >Price(Inclusive of VAT): <sup>*</sup></label>
+		<div class="controls">
+			<input type="text" id="inputprice" ng-model="category.price" value={{category.price}}>
+		</div>
+	  </div>
+
+	<div class="alert alert-block alert-error fade in">
+		<button type="button" class="close" data-dismiss="alert">×</button>
+		<strong>Please makes sure</strong> that before updating product stock
+	 </div>	
+	 
+	<div class="control-group">
+			<div class="controls">
+				<input class="btn btn-large btn-success" ng-click="updateProductInfo(category.price,category.quantity)"  type="submit" value="Update" />
+			</div>
+		</div>		
+	</form>
+</div>
+</div>
+</script>
 		<div ng-view></div>
 		</div>
 	</div>
@@ -268,7 +333,7 @@
 	<div class="container">
 		<div class="row">
 		 </div>
-		<p class="pull-right">&copy; akabdulrazak</p>
+		<p class="pull-right">&copy; </p>
 	</div><!-- Container End -->
 	</div>
 <!-- Placed at the end of the document so the pages load faster ============================================= -->
