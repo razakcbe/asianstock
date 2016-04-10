@@ -35,21 +35,21 @@
 </div>
 <!-- Navbar ================================================== -->
 <div id="logoArea" class="navbar">
-<a id="smallScreen" data-target="#topMenu" data-toggle="collapse" class="btn btn-navbar">
+<!-- <a id="smallScreen" data-target="#topMenu" data-toggle="collapse" class="btn btn-navbar">
 	<span class="icon-bar"></span>
 	<span class="icon-bar"></span>
 	<span class="icon-bar"></span>
-</a>
+</a> -->
   <div class="navbar-inner" ng-controller="productController">
-    <a class="brand" href="#/products"><img src="themes/images/logo.png" alt="Bootsshop"/></a>
-		<input id="srchFld" class="srchTxt" type="text" />
-		<select class="srchTxt" ng-options="product.name +'-'+product.code for product in products" ng-model="selected" ng-change="dropboxitemselected()">
+    <a class="brand" href="#/products"><img src="themes/images/logo.png" alt="Asian Paint"/></a>
+		<input id="srchFld" class="srchTxt" type="text" style="margin-top: 20px;"/>
+		<select style="margin-top: 20px;" class="srchTxt" ng-options="product.name +'-'+product.code for product in products" ng-model="selected" ng-change="dropboxitemselected()">
 		</select>
-		<a ui-sref="" role="button" ><span class="btn btn-primary">Go</span></a>
+		<a ui-sref="" role="button" ><span class="btn btn-primary" style="margin-top: 10px;">Go</span></a>
     <ul id="topMenu" class="nav pull-right">
-	 <li class=""><a href="">Specials Offer</a></li>
+	 <!-- <li class=""><a href="">Specials Offer</a></li>
 	 <li class=""><a href="">Delivery</a></li>
-	 <li class=""><a href="">Contact</a></li>
+	 <li class=""><a href="">Contact</a></li> -->
 	 <li class="">
 	 <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
 	<div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
