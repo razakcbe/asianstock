@@ -236,8 +236,6 @@
 				<tr class="techSpecRow"><th colspan="2">Product Details</th></tr>
 				<tr class="techSpecRow"><td class="techSpecTD1">Name: </td><td class="techSpecTD2">{{category.product.name}}</td></tr>
 				<tr class="techSpecRow"><td class="techSpecTD1">Code:</td><td class="techSpecTD2">{{category.product.code}}</td></tr>
-				<tr class="techSpecRow"><td class="techSpecTD1">Variant type:</td><td class="techSpecTD2">{{category.type}}</td></tr>
-				<tr class="techSpecRow"><td class="techSpecTD1">Quantity:</td><td class="techSpecTD2">{{category.quantity}}</td></tr>
 				<tr class="techSpecRow"><td class="techSpecTD1">Price(Exclusive VAT):</td><td class="techSpecTD2">&#8377;{{category.nonVatAmount | number:2}}</td></tr>
 				<tr class="techSpecRow"><td class="techSpecTD1">VAT:</td><td class="techSpecTD2">&#8377;{{category.vatAmount | number:2}}</td></tr>
 				<tr class="techSpecRow"><td class="techSpecTD1">MRP:</td><td class="techSpecTD2">&#8377;{{category.price}}</td></tr>
