@@ -8,8 +8,9 @@ CREATE TABLE public.product
 WITH (
   OIDS=FALSE
 );
+
 ALTER TABLE public.product
-  OWNER TO postgres;
+  OWNER TO gkksafsxxqyqfi;
 
 CREATE TABLE public.category_type
 (
@@ -29,7 +30,7 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE public.category_type
-  OWNER TO postgres;
+  OWNER TO gkksafsxxqyqfi;
   
   
 CREATE TABLE public.revinfo
@@ -42,7 +43,7 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE public.revinfo
-  OWNER TO postgres;
+  OWNER TO gkksafsxxqyqfi;
 
 CREATE TABLE public.product_aud
 (
@@ -60,7 +61,7 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE public.product_aud
-  OWNER TO postgres;
+  OWNER TO gkksafsxxqyqfi;
 CREATE TABLE public.category_type_aud
 (
   id bigint NOT NULL,
@@ -81,6 +82,6 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE public.category_type_aud
-  OWNER TO postgres;
+  OWNER TO gkksafsxxqyqfi;
 
 
