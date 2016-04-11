@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-   <meta charset="ISO-8859-1">
-    <title>Stock Maintenance</title>
+    <meta charset="utf-8">
+    <title>Bootshop online Shopping cart</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+<!--Less styles -->
+   <!-- Other Less css file //different less files has different color scheam
+	<link rel="stylesheet/less" type="text/css" href="themes/less/simplex.less">
+	<link rel="stylesheet/less" type="text/css" href="themes/less/classified.less">
+	<link rel="stylesheet/less" type="text/css" href="themes/less/amelia.less">  MOVE DOWN TO activate
+	-->
+	<!--<link rel="stylesheet/less" type="text/css" href="themes/less/bootshop.less">
+	<script src="themes/js/less.js" type="text/javascript"></script> -->
 	
 <!-- Bootstrap style --> 
     <link id="callCss" rel="stylesheet" href="themes/bootshop/bootstrap.min.css" media="screen"/>
@@ -23,33 +31,45 @@
     <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple-touch-icon-57-precomposed.png">
 	<style type="text/css" id="enject"></style>
 	<script type="text/javascript" src="angular.js"></script>
-	<script type="text/javascript" src="angular-route.js"></script>
-	<script type="text/javascript" src="scripts.js"></script>
+    <script type="text/javascript" src="angular-route.js"></script>
+    <script type="text/javascript" src="scripts.js"></script>
   </head>
 <body ng-app="paintProducts">
 <div id="header">
 <div class="container">
 <div id="welcomeLine" class="row">
 	<div class="span6">Welcome!<strong> User</strong></div>
-	<div class="span6"></div>
+	<div class="span6">
+	<div class="pull-right">
+		<!-- <a href="product_summary.html"><span class="">Fr</span></a>
+		<a href="product_summary.html"><span class="">Es</span></a>
+		<span class="btn btn-mini">En</span>
+		<a href="product_summary.html"><span>&pound;</span></a>
+		<span class="btn btn-mini">$155.00</span>
+		<a href="product_summary.html"><span class="">$</span></a>
+		<a href="product_summary.html"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your cart </span> </a> 
+ -->	</div>
+	</div>
 </div>
 <!-- Navbar ================================================== -->
 <div id="logoArea" class="navbar">
-<!-- <a id="smallScreen" data-target="#topMenu" data-toggle="collapse" class="btn btn-navbar">
+<a id="smallScreen" data-target="#topMenu" data-toggle="collapse" class="btn btn-navbar">
 	<span class="icon-bar"></span>
 	<span class="icon-bar"></span>
 	<span class="icon-bar"></span>
-</a> -->
+</a>
   <div class="navbar-inner" ng-controller="productController">
-    <a class="brand" href="#/products"><img src="themes/images/logo.png" alt="Asian Paint"/></a>
-		<input id="srchFld" class="srchTxt" type="text" style="margin-top: 20px;"/>
-		<select style="margin-top: 20px;" class="srchTxt" ng-options="product.name +'-'+product.code for product in products" ng-model="selected" ng-change="dropboxitemselected()">
-		</select>
-		<a ui-sref="" role="button" ><span class="btn btn-primary" style="margin-top: 10px;">Go</span></a>
+    <a class="brand" href="index.html"><img src="themes/images/logo.png" alt="Bootsshop"/></a>
+		<form class="form-inline navbar-search">
+		<input id="srchFld" class="srchTxt" type="text" />
+<select class="srchTxt" ng-options="product.name +'-'+product.code for product in products" ng-model="selected" ng-change="dropboxitemselected()">
+        </select>
+		<button type="submit" id="submitButton" class="btn btn-primary">Go</button>
+    </form>
     <ul id="topMenu" class="nav pull-right">
-	 <!-- <li class=""><a href="">Specials Offer</a></li>
-	 <li class=""><a href="">Delivery</a></li>
-	 <li class=""><a href="">Contact</a></li> -->
+	 <li class=""><a href="#/addproduct">Add Product</a></li>
+	 <li class=""><a href="normal.html">All Products</a></li>
+	 <li class=""><a href="contact.html">Stock</a></li>
 	 <li class="">
 	 <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
 	<div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -86,7 +106,7 @@
 	<div class="container">
 	<div class="row">
 <!-- Sidebar ================================================== -->
-	<div id="sidebar" class="span3" ng-controller="productController">
+	<div id="sidebar" class="span3" ng-controller="uniqueProductName">
 		<ul id="sideManu" class="nav nav-tabs nav-stacked">
 			<li class="subMenu open"><a>ASIAN PAINTS</a>
 				<ul>
@@ -94,17 +114,13 @@
 				<li><a href="products.html"><i class="icon-chevron-right"></i>Computers, Tablets & laptop (30)</a></li>
 				<li><a href="products.html"><i class="icon-chevron-right"></i>Mobile Phone (80)</a></li>
 				<li><a href="products.html"><i class="icon-chevron-right"></i>Sound & Vision (15)</a></li> -->
-				<li ng-repeat="product in products">
-				<!-- <a href="products.html"><i class="icon-chevron-right"></i>{{product.name}}</a> -->
+				<li ng-repeat="productname in productnames">
+					<a href="products.html"><i class="icon-chevron-right"></i>{{productname}}</a>
 				</li>
 				</ul>
 			</li>
-			<li class="subMenu"><a> CATEGORY II</a>
-			<ul style="display:none">											
-			</ul>
-			</li>
-			<li class="subMenu"><a>CATEGORY III</a>
-			</li>
+			<li class="subMenu"><a> CATEGORY II</a><ul style="display:none"></ul></li>
+			<li class="subMenu"><a>CATEGORY III</a></li>
 			<li><a href="products.html">CATEGORY IV</a></li>
 			<li><a href="products.html">CATEGORY V</a></li>
 			<li><a href="products.html">CATEGORY VI</a></li>
@@ -280,7 +296,7 @@
 		<div class="control-group">
 			<label class="control-label" for="inputproductname">Product name <sup>*</sup></label>
 			<div class="controls">
-			  <input type="text" readonly style="width: 400px;" id="inputproductname" ng-model="category.product.name" value={{category.product.name}}>
+			  <input type="text" readonly id="inputproductname" ng-model="category.product.name" value={{category.product.name}}>
 			</div>
 		 </div>
 		 <div class="control-group">
@@ -298,13 +314,13 @@
 	<div class="control-group">
 		<label class="control-label" for="inputquantity">Quantity Available <sup>*</sup></label>
 		<div class="controls">
-		  <input type="text" id="inputquantity" ng-model="category.quantity" value={{category.quantity}}>
+		  <input type="text" ng-keypress="filterValue($event)" id="inputquantity" ng-model="category.quantity" value={{category.quantity}}>
 		</div>
 	  </div>	  
 		<div class="control-group">
 		<label class="control-label" for="inputprice" >Price(Inclusive of VAT): <sup>*</sup></label>
 		<div class="controls">
-			<input type="text" id="inputprice" ng-model="category.price" value={{category.price}}>
+			<input type="text" ng-keypress="filterValue($event)" id="inputprice" ng-model="category.price" value={{category.price}}>
 		</div>
 	  </div>
 
@@ -316,6 +332,86 @@
 	<div class="control-group">
 			<div class="controls">
 				<input class="btn btn-large btn-success" ng-click="updateProductInfo(category.price,category.quantity)"  type="submit" value="Update" />
+			</div>
+		</div>		
+	</form>
+</div>
+</div>
+</script>
+<script type="text/ng-template" id ="addproduct">
+	<div class="span9">
+    <ul class="breadcrumb">
+		<li><a href="#/products">Home</a> <span class="divider">/</span></li>
+		<li class="active">Add Product</li>
+    </ul>
+	<h3> Registration</h3>	
+	<div class="well" ng-controller="addProductController">
+	<form class="form-horizontal" >
+		<h4>Add Product Info</h4>
+		<div class="control-group">
+		<label class="control-label">Image <sup>*</sup></label>
+		<div class="controls">
+		 <div id="gallery" class="span3">
+			<input type="file" id="inputproductimage" ng-model="category.imageurl">
+			</div>
+		</div>
+		</div>
+		<div class="control-group" ng-init="isnewproduct='dropdown'">
+			<label class="control-label" for="newproduct">Do you want to create new product ?<sup>*</sup></label>
+			<div class="controls">
+			  <input type="radio" id="newproduct" ng-model="isnewproduct" value="dropdown"> Yes
+			  <input type="radio" id="newproduct" ng-model="isnewproduct" value="text"> No
+			</div>
+		 </div>
+
+		<div class="control-group" ng-show="isShown('dropdown')">
+			<label class="control-label" for="inputproductname">Product name <sup>*</sup></label>
+			<div class="controls">
+			  <select class="srchTxt" ng-options="product for product in products" ng-model="category.product.name">
+        	   </select>
+			</div>
+		 </div>
+
+		<div class="control-group" ng-show="isShown('text')">
+			<label class="control-label" for="inputproductname">Product name <sup>*</sup></label>
+			<div class="controls">
+			  <input type="text" id="inputproductname" ng-model="category.product.name">
+			</div>
+		 </div>
+
+		 <div class="control-group">
+			<label class="control-label" for="inputproductcode">Product code <sup>*</sup></label>
+			<div class="controls">
+			  <input type="text" id="inputproductcode" ng-model="category.product.code">
+			</div>
+		 </div>
+		<div class="control-group">
+		<label class="control-label" for="inputvariant">Variant type<sup>*</sup></label>
+		<div class="controls">
+		  <input type="text" id="inputvariant" ng-model="category.type">
+		</div>
+	  </div>	  
+	<div class="control-group">
+		<label class="control-label" for="inputquantity">Quantity Available <sup>*</sup></label>
+		<div class="controls">
+		  <input type="text" ng-keypress="filterValue($event)" id="inputquantity" ng-model="category.quantity">
+		</div>
+	  </div>	  
+		<div class="control-group">
+		<label class="control-label" for="inputprice" >Price(Inclusive of VAT): <sup>*</sup></label>
+		<div class="controls">
+			<input type="text" ng-keypress="filterValue($event)" id="inputprice" ng-model="category.price">
+		</div>
+	  </div>
+
+	<div class="alert alert-block alert-error fade in">
+		<button type="button" class="close" data-dismiss="alert">×</button>
+		<strong>Please enter</strong> all required fields
+	 </div>	
+	 
+	<div class="control-group">
+			<div class="controls">
+				<input class="btn btn-large btn-success" ng-click="addProductInfo()"  type="submit" value="Create" />
 			</div>
 		</div>		
 	</form>

@@ -1,5 +1,6 @@
 var app = angular.module('paintProducts', ['ngRoute']);
-var basicurl = "https://asianstock.herokuapp.com/product";
+//var basicurl = "https://asianstock.herokuapp.com/product";
+var basicurl = "http://localhost:8080/product";
 
 
 app.config(['$routeProvider',
@@ -28,6 +29,10 @@ app.config(['$routeProvider',
         when('/updateproductInfo/:productCode/:categoryType', {
             templateUrl: 'viewproduct',
             controller: 'categoryTypeController'
+        }).
+        when('/addproduct', {
+            templateUrl: 'addproduct',
+            controller: 'addProductController'
         }).
         otherwise({
             redirectTo: '/'
@@ -93,5 +98,52 @@ app.controller("categoriesController", function($scope, $http, $routeParams, $lo
 
     $scope.updateproduct = function(code, type) {
         $location.url('/updateproduct/' + code + "/" + type);
+    };
+});
+
+app.controller("uniqueProductName", function($scope, $http, $log, $location) {
+    $scope.selected = null;
+   $http.get(basicurl + "/uniqueProductName").then(function(response) {
+        $scope.productnames = response.data;
+    });
+
+/*    $scope.viewproduct = function(code, type) {
+        $location.url('/viewproduct/' + code + "/" + type);
+    };*/
+});
+
+app.controller("addProductController", function($scope, $http, $log, $location) {
+	
+    $scope.selected = null;
+    $scope.color = 'dropdown';
+    $http.get(basicurl + "/uniqueProductName").then(function(response) {
+        $scope.products = response.data;
+    });
+    
+    $scope.filterValue = function($event){
+        if(isNaN(String.fromCharCode($event.keyCode))){
+            $event.preventDefault();
+        }
+    };
+    
+    $scope.isShown = function(color) {
+        return color === $scope.isnewproduct;
+    };
+    
+    $scope.addProductInfo = function(code, type) {
+        var url = basicurl + "/add";
+        var data = angular.toJson($scope.category);
+        var config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        $http.post(url, data, config)
+            .success(function(data, status, headers, config) {
+                $location.url('/viewproduct/' + $scope.category.product.code + "/" + $scope.category.type);
+            })
+            .error(function(data, status, header, config) {
+
+            });
     };
 });

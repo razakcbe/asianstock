@@ -1,3 +1,10 @@
+CREATE SEQUENCE public.hibernate_sequence
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+    
 CREATE TABLE public.product
 (
   id bigint NOT NULL,
@@ -8,9 +15,6 @@ CREATE TABLE public.product
 WITH (
   OIDS=FALSE
 );
-
-ALTER TABLE public.product
-  OWNER TO gkksafsxxqyqfi;
 
 CREATE TABLE public.category_type
 (
@@ -29,9 +33,6 @@ CREATE TABLE public.category_type
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE public.category_type
-  OWNER TO gkksafsxxqyqfi;
-  
   
 CREATE TABLE public.revinfo
 (
@@ -42,8 +43,6 @@ CREATE TABLE public.revinfo
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE public.revinfo
-  OWNER TO gkksafsxxqyqfi;
 
 CREATE TABLE public.product_aud
 (
@@ -60,8 +59,7 @@ CREATE TABLE public.product_aud
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE public.product_aud
-  OWNER TO gkksafsxxqyqfi;
+
 CREATE TABLE public.category_type_aud
 (
   id bigint NOT NULL,
@@ -81,7 +79,4 @@ CREATE TABLE public.category_type_aud
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE public.category_type_aud
-  OWNER TO gkksafsxxqyqfi;
-
-
+;

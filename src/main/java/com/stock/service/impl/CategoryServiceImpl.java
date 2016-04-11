@@ -17,9 +17,9 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired
 	private CategoryTypeRepository cateRepository;
-	
+
 	//private static DecimalFormat df2 = new DecimalFormat(".##");
-	
+
 	@Override
 	public CategoryType save(CategoryType cat) {
 		return cateRepository.save(cat);
@@ -65,9 +65,10 @@ public class CategoryServiceImpl implements CategoryService {
 	public List<CategoryType> findLastUpdatedCategoryType() {
 		List<CategoryType> categoryList = cateRepository.findLastUpdatedCategoryType();
 		for(CategoryType cy : categoryList){
-			Double vatAmount = StockUtils.calculateNonVatFromMRP(cy.getPrice(), new BigDecimal(cy.getVatPercentage()));
-			cy.setVatAmount(vatAmount);
-			cy.setNonVatAmount(cy.getPrice()- vatAmount);
+			if(cy.getPrice()!= null && cy.getVatPercentage()!=null){
+				Double vatAmount = StockUtils.calculateNonVatFromMRP(cy.getPrice(), new BigDecimal(cy.getVatPercentage()));
+				cy.setVatAmount(vatAmount);
+				cy.setNonVatAmount(cy.getPrice()- vatAmount);}
 		}
 		return categoryList;
 	}
