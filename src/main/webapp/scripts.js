@@ -1,6 +1,6 @@
 var app = angular.module('paintProducts', ['ngRoute']);
-var basicurl = "https://asianstock.herokuapp.com/product";
-//var basicurl = "http://localhost:8080/product";
+//var basicurl = "https://asianstock.herokuapp.com/product";
+var basicurl = "http://localhost:8080/product";
 
 
 app.config(['$routeProvider',
@@ -37,6 +37,10 @@ app.config(['$routeProvider',
         when('/allproduct', {
             templateUrl: 'allproduct',
             controller: 'allProductController'
+        }).
+        when('/displayProductsByCategory/:productUniqueName', {
+            templateUrl: 'producttype',
+            controller: 'displayProductByCategoryController'
         }).
         otherwise({
             redirectTo: '/'
@@ -103,17 +107,6 @@ app.controller("categoriesController", function($scope, $http, $routeParams, $lo
     $scope.updateproduct = function(code, type) {
         $location.url('/updateproduct/' + code + "/" + type);
     };
-});
-
-app.controller("uniqueProductName", function($scope, $http, $log, $location) {
-    $scope.selected = null;
-    $http.get(basicurl + "/uniqueProductName").then(function(response) {
-        $scope.productnames = response.data;
-    });
-
-    /*    $scope.viewproduct = function(code, type) {
-            $location.url('/viewproduct/' + code + "/" + type);
-        };*/
 });
 
 app.controller("addProductController", function($scope, $http, $log, $location) {
@@ -189,8 +182,23 @@ app.controller("productMainCategory", function($scope, $http, $log, $location) {
             $scope.productsfour = response.data;
         });
     };
+    
+    $scope.viewallproduct = function(product) {
+     $location.url('/displayProductsByCategory/' + product);
+    };
 
 });
 
-
+app.controller("displayProductByCategoryController", function($scope, $http,$routeParams, $location) {
+   
+   var productname = $routeParams.productUniqueName;
+   
+    $http.get(basicurl + "/productsbyname/"+productname).then(function(response) {
+        $scope.products = response.data;
+    });
+    
+    $scope.viewallvariant = function(product) {
+    	$location.url("/product/" + product);
+    };
+});
 //<img ng-src="data:image/JPEG;base64,{{image}}">

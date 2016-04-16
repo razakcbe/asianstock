@@ -60,7 +60,7 @@
 	<span class="icon-bar"></span>
 </a>
   <div class="navbar-inner" ng-controller="productController">
-    <a class="brand" href="index.html"><img src="themes/images/logo.png" alt="Bootsshop"/></a>
+    <a class="brand" href="#"><img src="themes/images/logo.png" alt="Bootsshop"/></a>
 		<form class="form-inline navbar-search">
 		<input id="srchFld" class="srchTxt" type="text" />
 <select class="srchTxt" ng-options="product.name +'-'+product.code for product in products" ng-model="selected" ng-change="dropboxitemselected()">
@@ -112,28 +112,28 @@
 			<li class="subMenu open" ng-click="fetchProductsByCategoryOne(-1)"><a>Wall Primer</a>
 				<ul>
 				<li ng-repeat="product in productsone">
-					<a href="products.html"><i class="icon-chevron-right"></i>{{product}}</a>
+					<a ng-click="viewallproduct(product)" ><i class="icon-chevron-right"></i>{{product}}</a>
 				</li>
 				</ul>
 			</li>
 				<li class="subMenu open" ng-click="fetchProductsByCategoryTwo(-2)"><a>Exterior Emulsion</a>
 				<ul>
 				<li ng-repeat="product in productstwo">
-					<a href="products.html"><i class="icon-chevron-right"></i>{{product}}</a>
+					<a ng-click="viewallproduct(product)" ><i class="icon-chevron-right"></i>{{product}}</a>
 				</li>
 				</ul>
 			</li>
 				<li class="subMenu open" ng-click="fetchProductsByCategoryThree(-3)"><a>Interior Emulsion</a>
 				<ul>
 				<li ng-repeat="product in productsthree">
-					<a href="products.html"><i class="icon-chevron-right"></i>{{product}}</a>
+					<a ng-click="viewallproduct(product)" ><i class="icon-chevron-right"></i>{{product}}</a>
 				</li>
 				</ul>
 			</li>
 				<li class="subMenu open" ng-click="fetchProductsByCategoryFour(-4)"><a>Apocolite Premium Enamel</a>
 				<ul>
 				<li ng-repeat="product in productsfour">
-					<a href="products.html"><i class="icon-chevron-right"></i>{{product}}</a>
+					<a ng-click="viewallproduct(product)"><i class="icon-chevron-right"></i>{{product}}</a>
 				</li>
 				</ul>
 			</li>
@@ -199,7 +199,7 @@
 			</div>
 			<div class="span3 alignR">
 			<h3>&#8377;{{category.price}}</h3>
-			 <a href="product_details.html" class="btn btn-large btn-primary"> Update <i class=" icon-shopping-cart"></i></a>
+			 <a href="#" class="btn btn-large btn-primary"> Update <i class=" icon-shopping-cart"></i></a>
 			  <a ng-click="viewproduct(category.product.code,category.type)" class="btn btn-large">View<i class="icon-zoom-in"></i></a>
 			</div>
 		</div>
@@ -212,7 +212,7 @@
 		
 		<li class="span3" ng-repeat="category in categories">
 			  <div class="thumbnail">
-				<a href="product_details.html"><img src="defaultpaint.jpg" alt=""/></a>
+				<a href="#"><img src="defaultpaint.jpg" alt=""/></a>
 				<div class="caption">
 				  <h5>{{category.product.name}}</h5>
 				  <p> 
@@ -461,7 +461,7 @@
 			</div>
 			<div class="span3 alignR">
 			<h3>&#8377;{{category.price}}</h3>
-			 <a href="product_details.html" class="btn btn-large btn-primary"> Update <i class=" icon-shopping-cart"></i></a>
+			 <a href="#" class="btn btn-large btn-primary"> Update <i class=" icon-shopping-cart"></i></a>
 			  <a ng-click="viewproduct(category.product.code,category.type)" class="btn btn-large">View<i class="icon-zoom-in"></i></a>
 			</div>
 		</div>
@@ -474,7 +474,7 @@
 		
 		<li class="span3" ng-repeat="category in categories">
 			  <div class="thumbnail">
-				<a href="product_details.html"><img src="defaultpaint.jpg" alt=""/></a>
+				<a href="#"><img src="defaultpaint.jpg" alt=""/></a>
 				<div class="caption">
 				  <h5>{{category.product.name}}</h5>
 				  <p> 
@@ -489,6 +489,38 @@
 	</div>
 </div>
 			<br class="clr"/>
+</div>
+</script>
+<script type="text/ng-template" id="producttype">
+	<div class="span9">
+    <ul class="breadcrumb">
+		<li><a href="#/products">Home</a> <span class="divider">/</span></li>
+		<li class="active">Products Name</li>
+    </ul>  
+<br class="clr"/>
+<div class="tab-content" ng-controller="displayProductByCategoryController">
+<h3> Products Name <small class="pull-right"> {{products.length}} products are available </small></h3>	
+	<hr class="soft"/>
+	<div class="tab-pane  active" id="blockView">
+		<ul class="thumbnails">
+		
+		<li class="span3" ng-repeat="product in products">
+			  <div class="thumbnail">
+				<a href="#"><img src="defaultpaint.jpg" alt=""/></a>
+				<div class="caption">
+				  <h5>{{product.name}}</h5>
+				  <p> 
+					{{product.code}}
+				  </p>
+				   <h4 style="text-align:center"><a class="btn" ng-click="viewallvariant(product.code)">View All <i class="icon-shopping-cart"></i></a></h4>
+				</div>
+			  </div>
+			</li>
+		  </ul>
+	<hr class="soft"/>
+	</div>
+</div>
+<br class="clr"/>
 </div>
 </script>
 		<div ng-view></div>
