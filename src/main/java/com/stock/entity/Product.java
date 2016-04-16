@@ -1,11 +1,11 @@
 package com.stock.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
@@ -31,9 +31,8 @@ public class Product {
 	@NotNull
 	private String name;
 	
-	@ManyToOne
-	@JoinColumn(name="productmaincategory_id")
-	ProductMainCategory productList;
+	@ManyToOne(cascade=CascadeType.ALL)
+	ProductMainCategory productMainCategory;
 	
 	public Long getId() {
 		return id;

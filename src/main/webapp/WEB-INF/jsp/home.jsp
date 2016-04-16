@@ -33,6 +33,7 @@
 	<script type="text/javascript" src="angular.js"></script>
     <script type="text/javascript" src="angular-route.js"></script>
     <script type="text/javascript" src="scripts.js"></script>
+    
   </head>
 <body ng-app="paintProducts">
 <div id="header">
@@ -68,7 +69,7 @@
     </form>
     <ul id="topMenu" class="nav pull-right">
 	 <li class=""><a href="#/addproduct">Add Product</a></li>
-	 <li class=""><a href="normal.html">All Products</a></li>
+	 <li class=""><a href="#/allproduct">All Products</a></li>
 	 <li class=""><a href="contact.html">Stock</a></li>
 	 <li class="">
 	 <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
@@ -106,24 +107,36 @@
 	<div class="container">
 	<div class="row">
 <!-- Sidebar ================================================== -->
-	<div id="sidebar" class="span3" ng-controller="uniqueProductName">
+	<div id="sidebar" class="span3" ng-controller="productMainCategory">
 		<ul id="sideManu" class="nav nav-tabs nav-stacked">
-			<li class="subMenu open"><a>ASIAN PAINTS</a>
+			<li class="subMenu open" ng-click="fetchProductsByCategoryOne(-1)"><a>Wall Primer</a>
 				<ul>
-				<!-- <li><a class="active" href="products.html"><i class="icon-chevron-right"></i>Cameras (100) </a></li>
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Computers, Tablets & laptop (30)</a></li>
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Mobile Phone (80)</a></li>
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Sound & Vision (15)</a></li> -->
-				<li ng-repeat="productname in productnames">
-					<a href="products.html"><i class="icon-chevron-right"></i>{{productname}}</a>
+				<li ng-repeat="product in productsone">
+					<a href="products.html"><i class="icon-chevron-right"></i>{{product}}</a>
 				</li>
 				</ul>
 			</li>
-			<li class="subMenu"><a> CATEGORY II</a><ul style="display:none"></ul></li>
-			<li class="subMenu"><a>CATEGORY III</a></li>
-			<li><a href="products.html">CATEGORY IV</a></li>
-			<li><a href="products.html">CATEGORY V</a></li>
-			<li><a href="products.html">CATEGORY VI</a></li>
+				<li class="subMenu open" ng-click="fetchProductsByCategoryTwo(-2)"><a>Exterior Emulsion</a>
+				<ul>
+				<li ng-repeat="product in productstwo">
+					<a href="products.html"><i class="icon-chevron-right"></i>{{product}}</a>
+				</li>
+				</ul>
+			</li>
+				<li class="subMenu open" ng-click="fetchProductsByCategoryThree(-3)"><a>Interior Emulsion</a>
+				<ul>
+				<li ng-repeat="product in productsthree">
+					<a href="products.html"><i class="icon-chevron-right"></i>{{product}}</a>
+				</li>
+				</ul>
+			</li>
+				<li class="subMenu open" ng-click="fetchProductsByCategoryFour(-4)"><a>Apocolite Premium Enamel</a>
+				<ul>
+				<li ng-repeat="product in productsfour">
+					<a href="products.html"><i class="icon-chevron-right"></i>{{product}}</a>
+				</li>
+				</ul>
+			</li>
 		</ul>
 		<br/>
 	</div>
@@ -279,7 +292,7 @@
 		<li><a href="#/products">Home</a> <span class="divider">/</span></li>
 		<li class="active">Update Product Info</li>
     </ul>
-	<h3> Registration</h3>	
+	<h3>Update Product</h3>	
 	<div class="well" ng-controller="categoryTypeController">
 	<form class="form-horizontal" >
 		<h4>Update Product Stock Info</h4>
@@ -344,7 +357,7 @@
 		<li><a href="#/products">Home</a> <span class="divider">/</span></li>
 		<li class="active">Add Product</li>
     </ul>
-	<h3> Registration</h3>	
+	<h3> Add Product</h3>	
 	<div class="well" ng-controller="addProductController">
 	<form class="form-horizontal" >
 		<h4>Add Product Info</h4>
@@ -352,7 +365,7 @@
 		<label class="control-label">Image <sup>*</sup></label>
 		<div class="controls">
 		 <div id="gallery" class="span3">
-			<input type="file" id="inputproductimage" ng-model="category.imageurl">
+			<input type="file" id="inputproductimage" ng-model="category.image">
 			</div>
 		</div>
 		</div>
@@ -416,6 +429,66 @@
 		</div>		
 	</form>
 </div>
+</div>
+</script>
+<script type="text/ng-template" id="allproduct">
+	<div class="span9">
+    <ul class="breadcrumb">
+		<li><a href="#/products">Home</a> <span class="divider">/</span></li>
+		<li class="active">Products Name</li>
+    </ul>  
+ <!-- <div id="myTab" class="pull-right">
+ <a href="#" data-toggle="tab"><span class="btn btn-large"><i class="icon-list"></i></span></a>
+ <a href="#" data-toggle="tab"><span class="btn btn-large btn-primary"><i class="icon-th-large"></i></span></a>
+</div> -->
+<br class="clr"/>
+<div class="tab-content" ng-controller="allProductController">
+<h3> Products Name <small class="pull-right"> {{categories.length}} products are available </small></h3>	
+	<hr class="soft"/>	
+	<div class="tab-pane" id="listView">
+		<div ng-repeat="category in categories">
+		<div class="row">	  
+			<div class="span2">
+				<img src="defaultpaint.jpg" alt=""/>
+			</div>
+			<div class="span4">
+				<h3>{{category.type}}</h3>				
+				<hr class="soft"/>
+				<h5>{{category.product.name}}</h5>
+				<p>
+				{{category.product.code}} - {{category.type}}
+				</p>
+			</div>
+			<div class="span3 alignR">
+			<h3>&#8377;{{category.price}}</h3>
+			 <a href="product_details.html" class="btn btn-large btn-primary"> Update <i class=" icon-shopping-cart"></i></a>
+			  <a ng-click="viewproduct(category.product.code,category.type)" class="btn btn-large">View<i class="icon-zoom-in"></i></a>
+			</div>
+		</div>
+		</div>
+		<hr class="soft"/>
+	</div>
+
+	<div class="tab-pane  active" id="blockView">
+		<ul class="thumbnails">
+		
+		<li class="span3" ng-repeat="category in categories">
+			  <div class="thumbnail">
+				<a href="product_details.html"><img src="defaultpaint.jpg" alt=""/></a>
+				<div class="caption">
+				  <h5>{{category.product.name}}</h5>
+				  <p> 
+					{{category.product.code}} - {{category.type}}
+				  </p>
+				   <h4 style="text-align:center"><a class="btn" ng-click="viewproduct(category.product.code,category.type)"> <i class="icon-zoom-in"></i></a> <a class="btn" ng-click="updateproduct(category.product.code,category.type)">Update <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&#8377;{{category.price}}</a></h4>
+				</div>
+			  </div>
+			</li>
+		  </ul>
+	<hr class="soft"/>
+	</div>
+</div>
+			<br class="clr"/>
 </div>
 </script>
 		<div ng-view></div>

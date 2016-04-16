@@ -39,4 +39,9 @@ public class ProductServiceImpl implements ProductService{
 	public Product findByCode(String code) {
 		return repository.findByCode(code);
 	}
+
+	@Override
+	public List<Product> findByProductCategory(Long productCategoryId) {
+		return repository.findByProductCategory(productCategoryId);
+	}
 }

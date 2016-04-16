@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.stock.entity.CategoryType;
 import com.stock.entity.Product;
 import com.stock.service.impl.CategoryServiceImpl;
+import com.stock.service.impl.ProductMainCatogorySericeImpl;
 import com.stock.service.impl.ProductServiceImpl;
 
 @RestController
@@ -27,6 +28,9 @@ public class ProductController {
 
 	@Autowired
 	CategoryServiceImpl categoryServiceImpl;
+	
+	@Autowired
+	ProductMainCatogorySericeImpl productMainCatogorySericeImpl;
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public ResponseEntity<List<Product>> fetchAllProduct() {
@@ -63,19 +67,7 @@ public class ProductController {
 		CategoryType cate = categoryServiceImpl.findByProductAndCategoryType(product.getId(),type);
 		return new ResponseEntity<CategoryType>(cate, HttpStatus.OK);
 	}
-	
-	@RequestMapping(value = "/uniqueProductName", method = RequestMethod.GET)
-	public ResponseEntity<Set<String>> fetchUniqueProductName() {
-		List<Product> productList = productService.getList();
-		Set<String> productSet = new HashSet<String>();
-		for(Product pro : productList){
-			if(!(productSet.contains(pro.getName()))){
-				productSet.add(pro.getName());
-			}
-		}
-		return new ResponseEntity<Set<String>>(productSet, HttpStatus.OK);
-	}
-	
+		
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ResponseEntity<CategoryType> addProduct(@RequestBody CategoryType categorytype){
 		Product product = new Product();
@@ -83,5 +75,27 @@ public class ProductController {
 		categorytype.setProduct(product);
 		categorytype = categoryServiceImpl.save(categorytype);
 		return new ResponseEntity<CategoryType>(categorytype, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/category/all", method = RequestMethod.GET)
+	public ResponseEntity<List<CategoryType>> fetchAllCategoryByProduct() {
+		return new ResponseEntity<List<CategoryType>>(categoryServiceImpl.getList(), HttpStatus.OK);
+	}
+		
+	@RequestMapping(value = "/productcategory/{code}", method = RequestMethod.GET)
+	public ResponseEntity<Set<String>> fetchProductsByMainCategory(@PathVariable String code) {
+		List<Product> mainList= productService.findByProductCategory(Long.valueOf(code));
+		Set<String> productList = fetchUniqueProductName(mainList);
+		return new ResponseEntity<Set<String>>(productList, HttpStatus.OK);
+	}
+	
+	public Set<String> fetchUniqueProductName(List<Product> mainList) {
+		Set<String> productSet = new HashSet<String>();
+		for(Product pro : mainList){
+			if(!(productSet.contains(pro.getName()))){
+				productSet.add(pro.getName());
+			}
+		}
+		return productSet;
 	}
 }

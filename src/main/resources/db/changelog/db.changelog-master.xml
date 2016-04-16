@@ -102,4 +102,9 @@
 		]]>
 		</sql>
 	</changeSet>
+	
+	<changeSet id="Added Producy Main" author="abdulrazak">
+		<sqlFile path="productsql/productmain.sql" encoding="utf8" dbms="postgresql"
+			splitStatements="false" relativeToChangelogFile="false" />
+	</changeSet>
 </databaseChangeLog>

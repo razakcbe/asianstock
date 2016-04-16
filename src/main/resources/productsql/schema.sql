@@ -18,7 +18,7 @@ WITH (
 CREATE TABLE public.productmaincategory
 (
   id bigint NOT NULL,
-  product_main_category character varying(255) NOT NULL,
+  name character varying(255) NOT NULL,
   CONSTRAINT productmaincategory_pkey PRIMARY KEY (id)
 )
 WITH (
@@ -30,7 +30,7 @@ CREATE TABLE public.productmaincategory_aud
   id bigint NOT NULL,
   rev integer NOT NULL,
   revtype smallint,
-  product_main_category character varying(255),
+  name character varying(255),
   CONSTRAINT productmaincategory_aud_pkey PRIMARY KEY (id, rev),
   CONSTRAINT fk_3rwnyk0gs5d2ghfr7rn1xyhmf FOREIGN KEY (rev)
       REFERENCES public.revinfo (rev) MATCH SIMPLE
@@ -45,19 +45,16 @@ CREATE TABLE public.product
   id bigint NOT NULL,
   code character varying(255) NOT NULL,
   name character varying(255) NOT NULL,
-  productmaincategory_id bigint,
-  product_id bigint,
+  product_main_category_id bigint,
   CONSTRAINT product_pkey PRIMARY KEY (id),
-  CONSTRAINT fk_at03k6o77o1rru4e6jtn4vbx7 FOREIGN KEY (product_id)
-      REFERENCES public.productmaincategory (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_h6rm09axen3vpy5ado9m2qvgu FOREIGN KEY (productmaincategory_id)
+  CONSTRAINT fk_nexkgdh1ymvsip2q3c2jnp2hq FOREIGN KEY (product_main_category_id)
       REFERENCES public.productmaincategory (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
   OIDS=FALSE
 );
+
 
 CREATE TABLE public.product_aud
 (
@@ -66,7 +63,7 @@ CREATE TABLE public.product_aud
   revtype smallint,
   code character varying(255),
   name character varying(255),
-  productmaincategory_id bigint,
+  product_main_category_id bigint,
   CONSTRAINT product_aud_pkey PRIMARY KEY (id, rev),
   CONSTRAINT fk_hfd6q5m8q72jkpcewy8ijeys9 FOREIGN KEY (rev)
       REFERENCES public.revinfo (rev) MATCH SIMPLE

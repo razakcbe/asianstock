@@ -1,6 +1,6 @@
 var app = angular.module('paintProducts', ['ngRoute']);
-//var basicurl = "https://asianstock.herokuapp.com/product";
-var basicurl = "http://localhost:8080/product";
+var basicurl = "https://asianstock.herokuapp.com/product";
+//var basicurl = "http://localhost:8080/product";
 
 
 app.config(['$routeProvider',
@@ -33,6 +33,10 @@ app.config(['$routeProvider',
         when('/addproduct', {
             templateUrl: 'addproduct',
             controller: 'addProductController'
+        }).
+        when('/allproduct', {
+            templateUrl: 'allproduct',
+            controller: 'allProductController'
         }).
         otherwise({
             redirectTo: '/'
@@ -103,39 +107,40 @@ app.controller("categoriesController", function($scope, $http, $routeParams, $lo
 
 app.controller("uniqueProductName", function($scope, $http, $log, $location) {
     $scope.selected = null;
-   $http.get(basicurl + "/uniqueProductName").then(function(response) {
+    $http.get(basicurl + "/uniqueProductName").then(function(response) {
         $scope.productnames = response.data;
     });
 
-/*    $scope.viewproduct = function(code, type) {
-        $location.url('/viewproduct/' + code + "/" + type);
-    };*/
+    /*    $scope.viewproduct = function(code, type) {
+            $location.url('/viewproduct/' + code + "/" + type);
+        };*/
 });
 
 app.controller("addProductController", function($scope, $http, $log, $location) {
-	
+
     $scope.selected = null;
     $scope.color = 'dropdown';
     $http.get(basicurl + "/uniqueProductName").then(function(response) {
         $scope.products = response.data;
     });
-    
-    $scope.filterValue = function($event){
-        if(isNaN(String.fromCharCode($event.keyCode))){
+
+    $scope.filterValue = function($event) {
+        if (isNaN(String.fromCharCode($event.keyCode))) {
             $event.preventDefault();
         }
     };
-    
+
     $scope.isShown = function(color) {
         return color === $scope.isnewproduct;
     };
-    
+
     $scope.addProductInfo = function(code, type) {
         var url = basicurl + "/add";
         var data = angular.toJson($scope.category);
         var config = {
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Content-Type': 'multipart/form-data'
             }
         }
         $http.post(url, data, config)
@@ -147,3 +152,45 @@ app.controller("addProductController", function($scope, $http, $log, $location) 
             });
     };
 });
+
+app.controller("allProductController", function($scope, $http, $log, $location) {
+    $scope.selected = null;
+    $http.get(basicurl + "/category/all").then(function(response) {
+        $scope.categories = response.data;
+    });
+
+    $scope.viewproduct = function(code, type) {
+        $location.url('/viewproduct/' + code + "/" + type);
+    };
+
+    $scope.updateproduct = function(code, type) {
+        $location.url('/updateproduct/' + code + "/" + type);
+    };
+});
+
+app.controller("productMainCategory", function($scope, $http, $log, $location) {
+    $scope.fetchProductsByCategoryOne = function(code) {
+        $http.get(basicurl + "/productcategory/" + code).then(function(response) {
+            $scope.productsone = response.data;
+        });
+    };
+    $scope.fetchProductsByCategoryTwo = function(code) {
+        $http.get(basicurl + "/productcategory/" + code).then(function(response) {
+            $scope.productstwo = response.data;
+        });
+    };
+    $scope.fetchProductsByCategoryThree = function(code) {
+        $http.get(basicurl + "/productcategory/" + code).then(function(response) {
+            $scope.productsthree = response.data;
+        });
+    };
+    $scope.fetchProductsByCategoryFour = function(code) {
+        $http.get(basicurl + "/productcategory/" + code).then(function(response) {
+            $scope.productsfour = response.data;
+        });
+    };
+
+});
+
+
+//<img ng-src="data:image/JPEG;base64,{{image}}">

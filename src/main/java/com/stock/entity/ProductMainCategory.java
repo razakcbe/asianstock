@@ -2,12 +2,12 @@ package com.stock.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -25,10 +25,9 @@ public class ProductMainCategory {
 	
 	@Column
 	@NotNull
-	private String productMainCategory;
+	private String name;
 	
-	@OneToMany
-	@JoinColumn(name="product_id")
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="productMainCategory")
 	private List<Product> productList;
 	
 	public Long getId() {
@@ -39,11 +38,19 @@ public class ProductMainCategory {
 		this.id = id;
 	}
 
-	public String getProductMainCategory() {
-		return productMainCategory;
+	public String getName() {
+		return name;
 	}
 
-	public void setProductMainCategory(String productMainCategory) {
-		this.productMainCategory = productMainCategory;
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public List<Product> getProductList() {
+		return productList;
+	}
+
+	public void setProductList(List<Product> productList) {
+		this.productList = productList;
 	}	
 }

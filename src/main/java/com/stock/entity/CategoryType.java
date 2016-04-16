@@ -1,5 +1,6 @@
 package com.stock.entity;
 
+import java.io.File;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
@@ -16,6 +18,7 @@ import org.hibernate.envers.Audited;
 
 @Entity
 @Audited
+@Table(name="categorytype")
 public class CategoryType {
 
 	@Id
@@ -51,7 +54,9 @@ public class CategoryType {
 	@Column(name="imageurl")
 	private String imageUrl;
 	
-	
+	@Transient
+	private File image;
+		
 	public CategoryType() {
 		super();
 	}
@@ -134,5 +139,13 @@ public class CategoryType {
 
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+
+	public File getImage() {
+		return image;
+	}
+
+	public void setImage(File image) {
+		this.image = image;
 	}
 }
