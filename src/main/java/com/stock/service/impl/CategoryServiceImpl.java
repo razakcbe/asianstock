@@ -50,9 +50,11 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public CategoryType findByProductAndCategoryType(Long productId, String categorytype) {
 		CategoryType type = cateRepository.findByProductAndCategoryType(productId, categorytype);
+		if(type.getPrice()!= null && type.getVatPercentage()!=null){
 		Double vatAmount = StockUtils.calculateNonVatFromMRP(type.getPrice(), new BigDecimal(type.getVatPercentage()));
 		type.setVatAmount(vatAmount);
 		type.setNonVatAmount(type.getPrice()- vatAmount);
+		}
 		return type;
 	}
 

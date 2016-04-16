@@ -61,52 +61,34 @@
 	</changeSet>
 
 	<changeSet id="removalOfColumn" author="abdulrazak">
-		<dropColumn tableName="category_type" columnName="non_vat_amount" />
-		<dropColumn tableName="category_type" columnName="vat_amount" />
-		<addColumn tableName="category_type">
-			<column name="vatpercentage" type="varchar(255)" />
-		</addColumn>
-		<addColumn tableName="category_type_aud">
-			<column name="vatpercentage" type="varchar(255)" />
-		</addColumn>
+		<dropColumn tableName="categorytype" columnName="non_vat_amount" />
+		<dropColumn tableName="categorytype" columnName="vat_amount" />
 	</changeSet>
 	<changeSet id="updateVat" author="abdulrazak">
 		<sql>
 		<![CDATA[
-		update category_type set vatpercentage = '14.5';
+		update categorytype set vatpercentage = '14.5';
 		]]>
 		</sql>
 	</changeSet>
 	<changeSet id="updatePrice" author="abdulrazak">
 		<sql>
 		<![CDATA[
-		update category_type set price = 1200;
+		update categorytype set price = 1200;
 		]]>
 		</sql>
 	</changeSet>
 	<changeSet id="ImageURL" author="akabdulrazak">
-		<addColumn tableName="category_type">
-			<column name="imageurl" type="varchar"></column>
-		</addColumn>
-		<addColumn tableName="category_type_aud">
-			<column name="imageurl" type="varchar"></column>
-		</addColumn>
 		<sql>
 		<![CDATA[
-		update category_type set imageurl = 'https://s3-ap-southeast-1.amazonaws.com/civil247-gallery/2647d62a3f104a41a98254ba8abd0f3f';
+		update categorytype set imageurl = 'https://s3-ap-southeast-1.amazonaws.com/civil247-gallery/2647d62a3f104a41a98254ba8abd0f3f';
 		]]>
 		</sql>
 	</changeSet>
 	<changeSet id="addlastupdatetime" author="abdulrazak">
-		<addColumn tableName="category_type">
-			<column name="lastupdatetime" type="timestamp" />
-		</addColumn>
-		<addColumn tableName="category_type_aud">
-			<column name="lastupdatetime" type="timestamp" />
-		</addColumn>
 		<sql>
 		<![CDATA[
-		update category_type set lastupdatetime = now();
+		update categorytype set lastupdatetime = now();
 		]]>
 		</sql>
 	</changeSet>

@@ -23,6 +23,6 @@ public interface CategoryTypeRepository extends JpaRepository<CategoryType, Inte
 	@Query(value="update CategoryType c set c.price = :price, c.quantity = :quantity where c.id = :categoryid")
 	public int updateStockAndPrice(@Param("categoryid") Long categoryid,@Param("quantity") int quantity,@Param("price") Double price);
 
-	@Query(value="select * from category_type c order by c.lastupdatetime desc limit 4",nativeQuery=true)
+	@Query(value="select * from categorytype c order by c.lastupdatetime desc limit 4",nativeQuery=true)
 	public List<CategoryType> findLastUpdatedCategoryType();
 }

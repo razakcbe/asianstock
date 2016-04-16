@@ -4,41 +4,56 @@ CREATE SEQUENCE public.hibernate_sequence
   MAXVALUE 9223372036854775807
   START 1
   CACHE 1;
-    
-CREATE TABLE public.product
+  
+  CREATE TABLE public.revinfo
 (
-  id bigint NOT NULL,
-  code character varying(255) NOT NULL,
-  name character varying(255) NOT NULL,
-  CONSTRAINT product_pkey PRIMARY KEY (id)
+  rev integer NOT NULL,
+  revtstmp bigint,
+  CONSTRAINT revinfo_pkey PRIMARY KEY (rev)
 )
 WITH (
   OIDS=FALSE
 );
 
-CREATE TABLE public.category_type
+CREATE TABLE public.productmaincategory
 (
   id bigint NOT NULL,
-  non_vat_amount numeric(19,2),
-  price numeric(19,2),
-  quantity integer,
-  type character varying(255) NOT NULL,
-  vat_amount numeric(19,2),
-  product_id bigint,
-  CONSTRAINT category_type_pkey PRIMARY KEY (id),
-  CONSTRAINT fk_l8da43tsmxhi1vdn5accf1lba FOREIGN KEY (product_id)
-      REFERENCES public.product (id) MATCH SIMPLE
+  product_main_category character varying(255) NOT NULL,
+  CONSTRAINT productmaincategory_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+
+CREATE TABLE public.productmaincategory_aud
+(
+  id bigint NOT NULL,
+  rev integer NOT NULL,
+  revtype smallint,
+  product_main_category character varying(255),
+  CONSTRAINT productmaincategory_aud_pkey PRIMARY KEY (id, rev),
+  CONSTRAINT fk_3rwnyk0gs5d2ghfr7rn1xyhmf FOREIGN KEY (rev)
+      REFERENCES public.revinfo (rev) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
   OIDS=FALSE
 );
-  
-CREATE TABLE public.revinfo
+
+CREATE TABLE public.product
 (
-  rev integer NOT NULL,
-  revtstmp bigint,
-  CONSTRAINT revinfo_pkey PRIMARY KEY (rev)
+  id bigint NOT NULL,
+  code character varying(255) NOT NULL,
+  name character varying(255) NOT NULL,
+  productmaincategory_id bigint,
+  product_id bigint,
+  CONSTRAINT product_pkey PRIMARY KEY (id),
+  CONSTRAINT fk_at03k6o77o1rru4e6jtn4vbx7 FOREIGN KEY (product_id)
+      REFERENCES public.productmaincategory (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_h6rm09axen3vpy5ado9m2qvgu FOREIGN KEY (productmaincategory_id)
+      REFERENCES public.productmaincategory (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
   OIDS=FALSE
@@ -51,6 +66,7 @@ CREATE TABLE public.product_aud
   revtype smallint,
   code character varying(255),
   name character varying(255),
+  productmaincategory_id bigint,
   CONSTRAINT product_aud_pkey PRIMARY KEY (id, rev),
   CONSTRAINT fk_hfd6q5m8q72jkpcewy8ijeys9 FOREIGN KEY (rev)
       REFERENCES public.revinfo (rev) MATCH SIMPLE
@@ -60,23 +76,46 @@ WITH (
   OIDS=FALSE
 );
 
-CREATE TABLE public.category_type_aud
+CREATE TABLE public.categorytype
+(
+  id bigint NOT NULL,
+  imageurl character varying(255),
+  lastupdatetime timestamp without time zone,
+  price double precision,
+  quantity integer,
+  type character varying(255) NOT NULL,
+  vatpercentage character varying(255),
+  product_id bigint,
+  non_vat_amount numeric(19,2),
+  vat_amount numeric(19,2),
+  CONSTRAINT categorytype_pkey PRIMARY KEY (id),
+  CONSTRAINT fk_nhf6tb4fuypvo4qw02ykhtxlh FOREIGN KEY (product_id)
+      REFERENCES public.product (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+
+CREATE TABLE public.categorytype_aud
 (
   id bigint NOT NULL,
   rev integer NOT NULL,
   revtype smallint,
-  non_vat_amount numeric(19,2),
-  price numeric(19,2),
+  imageurl character varying(255),
+  lastupdatetime timestamp without time zone,
+  price double precision,
   quantity integer,
   type character varying(255),
-  vat_amount numeric(19,2),
+  vatpercentage character varying(255),
   product_id bigint,
-  CONSTRAINT category_type_aud_pkey PRIMARY KEY (id, rev),
-  CONSTRAINT fk_5xxi1ylsjfsvtu731bww0bmqk FOREIGN KEY (rev)
+  CONSTRAINT categorytype_aud_pkey PRIMARY KEY (id, rev),
+  CONSTRAINT fk_19qotswh36k5jc1ueu84vp9wo FOREIGN KEY (rev)
       REFERENCES public.revinfo (rev) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
   OIDS=FALSE
 );
-;
+
+
