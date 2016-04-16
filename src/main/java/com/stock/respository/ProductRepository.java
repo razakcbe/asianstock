@@ -12,7 +12,7 @@ import com.stock.entity.Product;
 @Transactional
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 	
-	Product findByName(String name);
+	List<Product> findByName(String name);
 
 	Product findById(Long id);
 	

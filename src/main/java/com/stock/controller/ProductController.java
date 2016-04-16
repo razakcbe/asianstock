@@ -98,4 +98,10 @@ public class ProductController {
 		}
 		return productSet;
 	}
+	
+	@RequestMapping(value = "/productsbyname/{name}", method = RequestMethod.GET)
+	public ResponseEntity<List<Product>> fetchProductsByName(@PathVariable String name) {
+		List<Product> productList= productService.findProductByName(name);
+		return new ResponseEntity<List<Product>>(productList, HttpStatus.OK);
+	}
 }
