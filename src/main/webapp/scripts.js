@@ -1,6 +1,6 @@
 var app = angular.module('paintProducts', ['ngRoute']);
-//var basicurl = "https://asianstock.herokuapp.com/product";
-var basicurl = "http://localhost:8080/product";
+var basicurl = "https://asianstock.herokuapp.com/product";
+//var basicurl = "http://localhost:8080/product";
 
 
 app.config(['$routeProvider',
