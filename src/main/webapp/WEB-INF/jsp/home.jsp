@@ -504,15 +504,11 @@
     <ul class="breadcrumb">
 		<li><a href="#/products">Home</a> <span class="divider">/</span></li>
 		<li class="active">Products Name</li>
-    </ul>  
- <!-- <div id="myTab" class="pull-right">
- <a href="#" data-toggle="tab"><span class="btn btn-large"><i class="icon-list"></i></span></a>
- <a href="#" data-toggle="tab"><span class="btn btn-large btn-primary"><i class="icon-th-large"></i></span></a>
-</div> -->
+    </ul>
 <br class="clr"/>
 <div class="tab-content">
 <h3> Products Name <small class="pull-right"> {{categories.length}} products are available </small></h3>
-<div class="pull-right"><h5>Search : <input type = "text" placeholder = "Search for text" ng-model="searchText" /></h5></div>
+<div class="pull-right"><h5>Search : <input type="text" ng-blur="getProducts()" ng-keypress="filterValue($event)" id="inputquantity" ng-model="inputquantity" ng-init="50"></h5></div>
 <br class="clr"/>
 	<div class="tab-pane  active" id="blockView">
 		<ul class="thumbnails">

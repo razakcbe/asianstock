@@ -207,17 +207,32 @@ app.controller("displayProductByCategoryController", function($scope, $http,$rou
 });
 
 app.controller("limitedStockController", function($scope, $http, $log, $location) {
-    $scope.selected = null;
-    $http.get(basicurl + "/category/limited").then(function(response) {
-        $scope.categories = response.data;
-    });
-
+	var quantity = $scope.inputquantity;
+    if(quantity == undefined){
+    	 $http.get(basicurl + "/category/limitedstock/"+10).then(function(response) {
+             $scope.categories = response.data;
+         });
+    }
+    
     $scope.viewproduct = function(code, type) {
         $location.url('/viewproduct/' + code + "/" + type);
     };
 
     $scope.updateproduct = function(code, type) {
         $location.url('/updateproduct/' + code + "/" + type);
+    };
+    
+    $scope.filterValue = function($event) {
+        if (isNaN(String.fromCharCode($event.keyCode))) {
+            $event.preventDefault();
+        }
+    };
+    
+    $scope.getProducts = function($event) {
+    	var quantity = $scope.inputquantity;
+        $http.get(basicurl + "/category/limitedstock/"+quantity).then(function(response) {
+            $scope.categories = response.data;
+        });
     };
 });
 //<img ng-src="data:image/JPEG;base64,{{image}}">

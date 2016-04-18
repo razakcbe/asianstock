@@ -105,8 +105,8 @@ public class ProductController {
 		return new ResponseEntity<List<Product>>(productList, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/category/limited", method = RequestMethod.GET)
-	public ResponseEntity<List<CategoryType>> fetchLimitedStockProducts() {
-		return new ResponseEntity<List<CategoryType>>(categoryServiceImpl.findLimitedStockVariant(3), HttpStatus.OK);
+	@RequestMapping(value = "/category/limitedstock/{quantity}", method = RequestMethod.GET)
+	public ResponseEntity<List<CategoryType>> fetchLimitedStockProducts(@PathVariable String quantity) {
+		return new ResponseEntity<List<CategoryType>>(categoryServiceImpl.findLimitedStockVariant(Integer.parseInt(quantity)), HttpStatus.OK);
 	}
 }
