@@ -104,4 +104,9 @@ public class ProductController {
 		List<Product> productList= productService.findProductByName(name);
 		return new ResponseEntity<List<Product>>(productList, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/category/limited", method = RequestMethod.GET)
+	public ResponseEntity<List<CategoryType>> fetchLimitedStockProducts() {
+		return new ResponseEntity<List<CategoryType>>(categoryServiceImpl.findLimitedStockVariant(3), HttpStatus.OK);
+	}
 }

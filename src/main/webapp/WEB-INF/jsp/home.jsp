@@ -70,8 +70,8 @@
     <ul id="topMenu" class="nav pull-right">
 	 <li class=""><a href="#/addproduct">Add Product</a></li>
 	 <li class=""><a href="#/allproduct">All Products</a></li>
-	 <li class=""><a href="contact.html">Stock</a></li>
-	 <li class="">
+	 <li class=""><a href="#/limitedstocks">Limited Stocks</a></li>
+<!-- 	 <li class="">
 	 <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
 	<div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
 		  <div class="modal-header">
@@ -96,7 +96,7 @@
 			<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
 		  </div>
 	</div>
-	</li>
+	</li> -->
     </ul>
   </div>
 </div>
@@ -150,7 +150,7 @@
 			<div class="carousel-inner">
 			  <div class="item active">
 			  <ul class="thumbnails">
-			  <li class="span3" ng-repeat="category in categories">
+			  <li class="span3" ng-repeat="category in categories | orderBy:'quantity':false"">
 				  <div class="thumbnail">
 				  <i class="tag"></i>
 					<a ng-click="viewproduct(category.product.code,category.type)"><img src="defaultpaint.jpg" alt=""></a>
@@ -175,16 +175,13 @@
 		<li><a href="#/products">Home</a> <span class="divider">/</span></li>
 		<li class="active">Products Name</li>
     </ul>  
- <!-- <div id="myTab" class="pull-right">
- <a href="#" data-toggle="tab"><span class="btn btn-large"><i class="icon-list"></i></span></a>
- <a href="#" data-toggle="tab"><span class="btn btn-large btn-primary"><i class="icon-th-large"></i></span></a>
-</div> -->
 <br class="clr"/>
-<div class="tab-content" ng-controller="categoriesController">
-<h3> Products Name <small class="pull-right"> {{categories.length}} products are available </small></h3>	
-	<hr class="soft"/>	
+<div class="tab-content">
+<h3> Products Name <small class="pull-right"> {{categories.length}} products are available </small></h3>
+<div class="pull-right"><h5>Search : <input type = "text" placeholder = "Search for text" ng-model="searchText" /></h5></div>
+<br class="clr"/>
 	<div class="tab-pane" id="listView">
-		<div ng-repeat="category in categories">
+		<div ng-repeat="category in categories | filter:searchText">
 		<div class="row">	  
 			<div class="span2">
 				<img src="defaultpaint.jpg" alt=""/>
@@ -210,7 +207,7 @@
 	<div class="tab-pane  active" id="blockView">
 		<ul class="thumbnails">
 		
-		<li class="span3" ng-repeat="category in categories">
+		<li class="span3" ng-repeat="category in categories | filter:searchText |orderBy:'quantity':false">
 			  <div class="thumbnail">
 				<a href="#"><img src="defaultpaint.jpg" alt=""/></a>
 				<div class="caption">
@@ -236,7 +233,7 @@
     <li><a href="#/products">Products</a> <span class="divider">/</span></li>
     <li class="active">product Details</li>
     </ul>
-	<div class="row" ng-controller="categoryTypeController">	  
+	<div class="row">	  
 			<div id="gallery" class="span3">
             <a href="defaultpaint.jpg" title="Asian Paint">
 				<img src="defaultpaint.jpg" style="width:100%" alt="Asian Paint"/>
@@ -293,7 +290,7 @@
 		<li class="active">Update Product Info</li>
     </ul>
 	<h3>Update Product</h3>	
-	<div class="well" ng-controller="categoryTypeController">
+	<div class="well">
 	<form class="form-horizontal" >
 		<h4>Update Product Stock Info</h4>
 		<div class="control-group">
@@ -358,7 +355,7 @@
 		<li class="active">Add Product</li>
     </ul>
 	<h3> Add Product</h3>	
-	<div class="well" ng-controller="addProductController">
+	<div class="well">
 	<form class="form-horizontal" >
 		<h4>Add Product Info</h4>
 		<div class="control-group">
@@ -442,43 +439,21 @@
  <a href="#" data-toggle="tab"><span class="btn btn-large btn-primary"><i class="icon-th-large"></i></span></a>
 </div> -->
 <br class="clr"/>
-<div class="tab-content" ng-controller="allProductController">
-<h3> Products Name <small class="pull-right"> {{categories.length}} products are available </small></h3>	
-	<hr class="soft"/>	
-	<div class="tab-pane" id="listView">
-		<div ng-repeat="category in categories">
-		<div class="row">	  
-			<div class="span2">
-				<img src="defaultpaint.jpg" alt=""/>
-			</div>
-			<div class="span4">
-				<h3>{{category.type}}</h3>				
-				<hr class="soft"/>
-				<h5>{{category.product.name}}</h5>
-				<p>
-				{{category.product.code}} - {{category.type}}
-				</p>
-			</div>
-			<div class="span3 alignR">
-			<h3>&#8377;{{category.price}}</h3>
-			 <a href="#" class="btn btn-large btn-primary"> Update <i class=" icon-shopping-cart"></i></a>
-			  <a ng-click="viewproduct(category.product.code,category.type)" class="btn btn-large">View<i class="icon-zoom-in"></i></a>
-			</div>
-		</div>
-		</div>
-		<hr class="soft"/>
-	</div>
-
+<div class="tab-content">
+<h3> Products Name <small class="pull-right"> {{categories.length}} products are available </small></h3>
+<div class="pull-right"><h5>Search : <input type = "text" placeholder = "Search for text" ng-model="searchText" /></h5></div>
+<br class="clr"/>
 	<div class="tab-pane  active" id="blockView">
 		<ul class="thumbnails">
 		
-		<li class="span3" ng-repeat="category in categories">
+		<li class="span3" ng-repeat="category in categories | filter:searchText | orderBy:'quantity':false">
 			  <div class="thumbnail">
 				<a href="#"><img src="defaultpaint.jpg" alt=""/></a>
 				<div class="caption">
 				  <h5>{{category.product.name}}</h5>
 				  <p> 
-					{{category.product.code}} - {{category.type}}
+					{{category.product.code}} - {{category.type}}</br>
+					<b>{{category.quantity}} items in stock</b>
 				  </p>
 				   <h4 style="text-align:center"><a class="btn" ng-click="viewproduct(category.product.code,category.type)"> <i class="icon-zoom-in"></i></a> <a class="btn" ng-click="updateproduct(category.product.code,category.type)">Update <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&#8377;{{category.price}}</a></h4>
 				</div>
@@ -498,13 +473,14 @@
 		<li class="active">Products Name</li>
     </ul>  
 <br class="clr"/>
-<div class="tab-content" ng-controller="displayProductByCategoryController">
-<h3> Products Name <small class="pull-right"> {{products.length}} products are available </small></h3>	
-	<hr class="soft"/>
+<div class="tab-content">
+<h3> Products Name <small class="pull-right"> {{products.length}} products are available </small></h3>
+<div class="pull-right"><h5>Search : <input type = "text" placeholder = "Search for text" ng-model="searchText" /></h5></div>
+<br class="clr"/>
 	<div class="tab-pane  active" id="blockView">
 		<ul class="thumbnails">
 		
-		<li class="span3" ng-repeat="product in products">
+		<li class="span3" ng-repeat="product in products | filter:searchText">
 			  <div class="thumbnail">
 				<a href="#"><img src="defaultpaint.jpg" alt=""/></a>
 				<div class="caption">
@@ -521,6 +497,44 @@
 	</div>
 </div>
 <br class="clr"/>
+</div>
+</script>
+<script type="text/ng-template" id="limitedstocks">
+	<div class="span9">
+    <ul class="breadcrumb">
+		<li><a href="#/products">Home</a> <span class="divider">/</span></li>
+		<li class="active">Products Name</li>
+    </ul>  
+ <!-- <div id="myTab" class="pull-right">
+ <a href="#" data-toggle="tab"><span class="btn btn-large"><i class="icon-list"></i></span></a>
+ <a href="#" data-toggle="tab"><span class="btn btn-large btn-primary"><i class="icon-th-large"></i></span></a>
+</div> -->
+<br class="clr"/>
+<div class="tab-content">
+<h3> Products Name <small class="pull-right"> {{categories.length}} products are available </small></h3>
+<div class="pull-right"><h5>Search : <input type = "text" placeholder = "Search for text" ng-model="searchText" /></h5></div>
+<br class="clr"/>
+	<div class="tab-pane  active" id="blockView">
+		<ul class="thumbnails">
+		
+		<li class="span3" ng-repeat="category in categories | filter:searchText | orderBy:'quantity':false">
+			  <div class="thumbnail">
+				<a href="#"><img src="defaultpaint.jpg" alt=""/></a>
+				<div class="caption">
+				  <h5>{{category.product.name}}</h5>
+				  <p> 
+					{{category.product.code}} - {{category.type}}</br>
+					<b>{{category.quantity}} items in stock</b>
+				  </p>
+				   <h4 style="text-align:center"><a class="btn" ng-click="viewproduct(category.product.code,category.type)"> <i class="icon-zoom-in"></i></a> <a class="btn" ng-click="updateproduct(category.product.code,category.type)">Update <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&#8377;{{category.price}}</a></h4>
+				</div>
+			  </div>
+			</li>
+		  </ul>
+	<hr class="soft"/>
+	</div>
+</div>
+			<br class="clr"/>
 </div>
 </script>
 		<div ng-view></div>

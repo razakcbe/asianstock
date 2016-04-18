@@ -18,4 +18,6 @@ public interface CategoryService {
 	int updateStockAndPrice(Long categoryid,int quantity,Double price);
 	
 	List<CategoryType> findLastUpdatedCategoryType();
+	
+	List<CategoryType> findLimitedStockVariant(int threashold);
 }

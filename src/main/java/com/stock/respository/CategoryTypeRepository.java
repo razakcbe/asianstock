@@ -25,4 +25,7 @@ public interface CategoryTypeRepository extends JpaRepository<CategoryType, Inte
 
 	@Query(value="select * from categorytype c order by c.lastupdatetime desc limit 4",nativeQuery=true)
 	public List<CategoryType> findLastUpdatedCategoryType();
+	
+	@Query(value="select c from CategoryType c where c.quantity <= :threashold")
+	public List<CategoryType> findLimitedStockVariant(@Param("threashold") int threashold);
 }

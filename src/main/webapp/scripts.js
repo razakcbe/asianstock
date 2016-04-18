@@ -42,6 +42,10 @@ app.config(['$routeProvider',
             templateUrl: 'producttype',
             controller: 'displayProductByCategoryController'
         }).
+        when('/limitedstocks', {
+            templateUrl: 'limitedstocks',
+            controller: 'limitedStockController'
+        }).
         otherwise({
             redirectTo: '/'
         });;
@@ -113,9 +117,9 @@ app.controller("addProductController", function($scope, $http, $log, $location) 
 
     $scope.selected = null;
     $scope.color = 'dropdown';
-    $http.get(basicurl + "/uniqueProductName").then(function(response) {
-        $scope.products = response.data;
-    });
+//    $http.get(basicurl + "/uniqueProductName").then(function(response) {
+//        $scope.products = response.data;
+//    });
 
     $scope.filterValue = function($event) {
         if (isNaN(String.fromCharCode($event.keyCode))) {
@@ -199,6 +203,21 @@ app.controller("displayProductByCategoryController", function($scope, $http,$rou
     
     $scope.viewallvariant = function(product) {
     	$location.url("/product/" + product);
+    };
+});
+
+app.controller("limitedStockController", function($scope, $http, $log, $location) {
+    $scope.selected = null;
+    $http.get(basicurl + "/category/limited").then(function(response) {
+        $scope.categories = response.data;
+    });
+
+    $scope.viewproduct = function(code, type) {
+        $location.url('/viewproduct/' + code + "/" + type);
+    };
+
+    $scope.updateproduct = function(code, type) {
+        $location.url('/updateproduct/' + code + "/" + type);
     };
 });
 //<img ng-src="data:image/JPEG;base64,{{image}}">

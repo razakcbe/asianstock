@@ -18,8 +18,6 @@ public class CategoryServiceImpl implements CategoryService {
 	@Autowired
 	private CategoryTypeRepository cateRepository;
 
-	//private static DecimalFormat df2 = new DecimalFormat(".##");
-
 	@Override
 	public CategoryType save(CategoryType cat) {
 		return cateRepository.save(cat);
@@ -72,6 +70,12 @@ public class CategoryServiceImpl implements CategoryService {
 				cy.setVatAmount(vatAmount);
 				cy.setNonVatAmount(cy.getPrice()- vatAmount);}
 		}
+		return categoryList;
+	}
+
+	@Override
+	public List<CategoryType> findLimitedStockVariant(int threashold) {
+		List<CategoryType> categoryList = cateRepository.findLimitedStockVariant(threashold);
 		return categoryList;
 	}
 }
