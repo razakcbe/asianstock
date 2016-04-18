@@ -264,3 +264,5 @@ app.controller("limitedStockController", function($scope, $http, $log, $location
     };
 });
 //<img ng-src="data:image/JPEG;base64,{{image}}">
+//https://murygin.wordpress.com/2014/10/13/rest-web-service-file-uploads-spring-boot/
+//http://www.codophile.com/how-to-upload-binary-file-to-spring-rest-service/
