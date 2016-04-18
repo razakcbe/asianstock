@@ -1,6 +1,6 @@
 var app = angular.module('paintProducts', ['ngRoute']);
-var basicurl = "https://asianstock.herokuapp.com/product";
-//var basicurl = "http://localhost:8080/product";
+//var basicurl = "https://asianstock.herokuapp.com/product";
+var basicurl = "http://localhost:8080/product";
 
 
 app.config(['$routeProvider',
@@ -117,9 +117,33 @@ app.controller("addProductController", function($scope, $http, $log, $location) 
 
     $scope.selected = null;
     $scope.color = 'dropdown';
-//    $http.get(basicurl + "/uniqueProductName").then(function(response) {
-//        $scope.products = response.data;
-//    });
+    
+    $http.get(basicurl + "/productsbyname/all").then(function(response) {
+        $scope.productcategories = response.data;
+    });
+    
+    $scope.populateProductName = function() {
+    	var productName = $scope.category.product.productMainCategory.name;
+    	switch(productName){
+    	case "Wall Primer":
+            code = "-1";
+            break;
+        case "Exterior Emulsion":
+            code = "-2";
+            break;
+        case "Interior Emulsion":
+            code = "-3";
+            break;
+        case "Apocolite Premium Enamel":
+            code = "-4";
+            break;
+        default:
+            break;
+    	}
+    	$http.get(basicurl + "/productcategory/" + code).then(function(response) {
+    	        $scope.products = response.data;
+    	 });
+    };
 
     $scope.filterValue = function($event) {
         if (isNaN(String.fromCharCode($event.keyCode))) {
@@ -128,6 +152,10 @@ app.controller("addProductController", function($scope, $http, $log, $location) 
     };
 
     $scope.isShown = function(color) {
+        return color === $scope.isnewproductcategory;
+    };
+    
+    $scope.isShownProductDD = function(color) {
         return color === $scope.isnewproduct;
     };
 

@@ -6,14 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-<!--Less styles -->
-   <!-- Other Less css file //different less files has different color scheam
-	<link rel="stylesheet/less" type="text/css" href="themes/less/simplex.less">
-	<link rel="stylesheet/less" type="text/css" href="themes/less/classified.less">
-	<link rel="stylesheet/less" type="text/css" href="themes/less/amelia.less">  MOVE DOWN TO activate
-	-->
-	<!--<link rel="stylesheet/less" type="text/css" href="themes/less/bootshop.less">
-	<script src="themes/js/less.js" type="text/javascript"></script> -->
 	
 <!-- Bootstrap style --> 
     <link id="callCss" rel="stylesheet" href="themes/bootshop/bootstrap.min.css" media="screen"/>
@@ -363,26 +355,49 @@
 		<div class="controls">
 		 <div id="gallery" class="span3">
 			<input type="file" id="inputproductimage" ng-model="category.image">
-			</div>
+		 </div>
 		</div>
 		</div>
-		<div class="control-group" ng-init="isnewproduct='dropdown'">
-			<label class="control-label" for="newproduct">Do you want to create new product ?<sup>*</sup></label>
+		<div class="control-group" ng-init="isnewproductcategory='dropdown'">
+			<label class="control-label" for="newproductcategory">Do you want to create new product category ?<sup>*</sup></label>
 			<div class="controls">
-			  <input type="radio" id="newproduct" ng-model="isnewproduct" value="dropdown"> Yes
-			  <input type="radio" id="newproduct" ng-model="isnewproduct" value="text"> No
+			  <input type="radio" id="newproductcategory" ng-model="isnewproductcategory" value="dropdown"> Yes
+			  <input type="radio" id="newproductcategory" ng-model="isnewproductcategory" value="text"> No
 			</div>
 		 </div>
 
 		<div class="control-group" ng-show="isShown('dropdown')">
-			<label class="control-label" for="inputproductname">Product name <sup>*</sup></label>
+			<label class="control-label" for="inputproductcategoryname">Product Category Name <sup>*</sup></label>
 			<div class="controls">
-			  <select class="srchTxt" ng-options="product for product in products" ng-model="category.product.name">
-        	   </select>
+			  <select class="srchTxt" id="inputproductcategoryname" ng-change="populateProductName()"  ng-options="productcategory.name for productcategory in productcategories" ng-model="category.product.productMainCategory">
+        	</select>
+			</div>
+		 </div>
+	
+		<div class="control-group" ng-show="isShown('text')">
+			<label class="control-label" for="inputproductcategoryname">Product Category Name <sup>*</sup></label>
+			<div class="controls">
+			  <input type="text" id="inputproductcategoryname" ng-model="category.product.productMainCategory">
 			</div>
 		 </div>
 
-		<div class="control-group" ng-show="isShown('text')">
+		<div class="control-group" ng-init="isnewproduct='DD'">
+			<label class="control-label" for="newproduct">Do you want to create new product ?<sup>*</sup></label>
+			<div class="controls">
+			  <input type="radio" id="newproduct" ng-model="isnewproduct" value="DD"> Yes
+			  <input type="radio" id="newproduct" ng-model="isnewproduct" value="TXT"> No
+			</div>
+		 </div>
+
+		 <div class="control-group" ng-show="isShownProductDD('DD')">
+			<label class="control-label" for="inputproductname">Product name <sup>*</sup></label>
+			<div class="controls">
+			  <select class="srchTxt" id="inputproductname" ng-options="product for product in products" ng-model="category.product.name">
+        	</select>
+			</div>
+		 </div>
+
+		<div class="control-group" ng-show="isShownProductDD('TXT')">
 			<label class="control-label" for="inputproductname">Product name <sup>*</sup></label>
 			<div class="controls">
 			  <input type="text" id="inputproductname" ng-model="category.product.name">
