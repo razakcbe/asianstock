@@ -24,6 +24,8 @@
 	<style type="text/css" id="enject"></style>
 	<script type="text/javascript" src="angular.js"></script>
     <script type="text/javascript" src="angular-route.js"></script>
+    <script type="text/javascript" src="ng-file-upload-shim.js"></script>
+    <script type="text/javascript" src="ng-file-upload.js"></script>
     <script type="text/javascript" src="scripts.js"></script>
     
   </head>
@@ -354,7 +356,7 @@
 		<label class="control-label">Image <sup>*</sup></label>
 		<div class="controls">
 		 <div id="gallery" class="span3">
-			<input type="file" id="inputproductimage" ng-model="category.image">
+			<input type="file" ng-model="file" name="file" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB" ngf-select />
 		 </div>
 		</div>
 		</div>

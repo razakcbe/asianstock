@@ -1,4 +1,4 @@
-var app = angular.module('paintProducts', ['ngRoute']);
+var app = angular.module('paintProducts', ['ngRoute','ngFileUpload']);
 //var basicurl = "https://asianstock.herokuapp.com/product";
 var basicurl = "http://localhost:8080/product";
 
@@ -113,7 +113,7 @@ app.controller("categoriesController", function($scope, $http, $routeParams, $lo
     };
 });
 
-app.controller("addProductController", function($scope, $http, $log, $location) {
+app.controller("addProductController", function($scope, $http, $log, $location,Upload) {
 
     $scope.selected = null;
     $scope.color = 'dropdown';
@@ -164,18 +164,36 @@ app.controller("addProductController", function($scope, $http, $log, $location) 
         var data = angular.toJson($scope.category);
         var config = {
             headers: {
-                'Content-Type': 'application/json',
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'application/json'
             }
         }
         $http.post(url, data, config)
             .success(function(data, status, headers, config) {
+            	 if ($scope.file) {
+            	        $scope.upload($scope.file);
+            	      }
                 $location.url('/viewproduct/' + $scope.category.product.code + "/" + $scope.category.type);
             })
             .error(function(data, status, header, config) {
 
             });
     };
+    
+    //'Content-Type': 'multipart/form-data'
+    $scope.upload = function () {
+    	var file = $scope.file;
+    	Upload.upload({
+            url: basicurl+'/upload',
+            data: {file: file}
+        }).then(function (resp) {
+            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+        }, function (resp) {
+            console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        });
+    }
 });
 
 app.controller("allProductController", function($scope, $http, $log, $location) {

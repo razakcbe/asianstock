@@ -125,7 +125,7 @@ public class ProductController {
 	
 	@RequestMapping(value = "/upload")
 	public String uploadFile(
-			@RequestParam("uploadedFile") MultipartFile uploadedFileRef) {
+			@RequestParam("file") MultipartFile uploadedFileRef) {
 		// Get name of uploaded file.
 		String fileName = uploadedFileRef.getOriginalFilename();
 

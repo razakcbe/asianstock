@@ -27,9 +27,11 @@ public class CategoryServiceImpl implements CategoryService {
 	public List<CategoryType> getList() {
 		List<CategoryType> resultList = cateRepository.findAll();
 		for(CategoryType cy : resultList){
-			Double vatAmount = StockUtils.calculateNonVatFromMRP(cy.getPrice(), new BigDecimal(cy.getVatPercentage()));
-			cy.setVatAmount(vatAmount);
-			cy.setNonVatAmount(cy.getPrice()- vatAmount);
+			if(cy.getPrice()!= null && cy.getVatPercentage()!= null){
+				Double vatAmount = StockUtils.calculateNonVatFromMRP(cy.getPrice(), new BigDecimal(cy.getVatPercentage()));
+				cy.setVatAmount(vatAmount);
+				cy.setNonVatAmount(cy.getPrice()- vatAmount);
+			}
 		}
 		return resultList;
 	}
@@ -38,9 +40,11 @@ public class CategoryServiceImpl implements CategoryService {
 	public List<CategoryType> findByProduct(Product product) {
 		List<CategoryType> resultList = cateRepository.findByProduct(product);
 		for(CategoryType cy : resultList){
-			Double vatAmount = StockUtils.calculateNonVatFromMRP(cy.getPrice(), new BigDecimal(cy.getVatPercentage()));
-			cy.setVatAmount(vatAmount);
-			cy.setNonVatAmount(cy.getPrice()- vatAmount);
+			if(cy.getPrice()!= null && cy.getVatPercentage()!= null){
+				Double vatAmount = StockUtils.calculateNonVatFromMRP(cy.getPrice(), new BigDecimal(cy.getVatPercentage()));
+				cy.setVatAmount(vatAmount);
+				cy.setNonVatAmount(cy.getPrice()- vatAmount);
+			}
 		}
 		return resultList;
 	}
@@ -49,9 +53,9 @@ public class CategoryServiceImpl implements CategoryService {
 	public CategoryType findByProductAndCategoryType(Long productId, String categorytype) {
 		CategoryType type = cateRepository.findByProductAndCategoryType(productId, categorytype);
 		if(type.getPrice()!= null && type.getVatPercentage()!=null){
-		Double vatAmount = StockUtils.calculateNonVatFromMRP(type.getPrice(), new BigDecimal(type.getVatPercentage()));
-		type.setVatAmount(vatAmount);
-		type.setNonVatAmount(type.getPrice()- vatAmount);
+			Double vatAmount = StockUtils.calculateNonVatFromMRP(type.getPrice(), new BigDecimal(type.getVatPercentage()));
+			type.setVatAmount(vatAmount);
+			type.setNonVatAmount(type.getPrice()- vatAmount);
 		}
 		return type;
 	}
