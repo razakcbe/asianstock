@@ -123,14 +123,14 @@ public class ProductController {
 	}
 	
 	
-	@RequestMapping(value = "/upload")
+	@RequestMapping(value = "/upload",method = RequestMethod.POST,produces = "text/plain; charset=utf-8")
 	public String uploadFile(
 			@RequestParam("file") MultipartFile uploadedFileRef) {
 		// Get name of uploaded file.
 		String fileName = uploadedFileRef.getOriginalFilename();
 
 		// Path where the uploaded file will be stored.
-		String path = "D:/" + fileName;
+		String path = "E:/asianstock/" + fileName;
 
 		// This buffer will store the data read from 'uploadedFileRef'
 		byte[] buffer = new byte[1000];
@@ -169,7 +169,7 @@ public class ProductController {
 			}
 		}
 
-		return "File uploaded successfully! Total Bytes Read="+totalBytes;
+		return fileName;
 	}
 
 }

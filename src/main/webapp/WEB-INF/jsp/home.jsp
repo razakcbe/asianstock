@@ -54,7 +54,7 @@
 	<span class="icon-bar"></span>
 </a>
   <div class="navbar-inner" ng-controller="productController">
-    <a class="brand" href="#"><img src="themes/images/logo.png" alt="Bootsshop"/></a>
+    <a class="brand" href="#/allproduct"><img src="themes/images/logo.png" alt="Bootsshop"/></a>
 		<form class="form-inline navbar-search">
 		<input id="srchFld" class="srchTxt" type="text" />
 <select class="srchTxt" ng-options="product.name +'-'+product.code for product in products" ng-model="selected" ng-change="dropboxitemselected()">
@@ -356,7 +356,7 @@
 		<label class="control-label">Image <sup>*</sup></label>
 		<div class="controls">
 		 <div id="gallery" class="span3">
-			<input type="file" ng-model="file" name="file" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB" ngf-select />
+			<input type="file" ng-model="file" name="file" accept="image/*" ngf-max-height="1000" ngf-select /><input class="btn btn-small btn-success" ng-click="uploadImage()"  type="submit" value="Upload" />
 		 </div>
 		</div>
 		</div>

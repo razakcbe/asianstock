@@ -113,89 +113,6 @@ app.controller("categoriesController", function($scope, $http, $routeParams, $lo
     };
 });
 
-app.controller("addProductController", function($scope, $http, $log, $location,Upload) {
-
-    $scope.selected = null;
-    $scope.color = 'dropdown';
-    
-    $http.get(basicurl + "/productsbyname/all").then(function(response) {
-        $scope.productcategories = response.data;
-    });
-    
-    $scope.populateProductName = function() {
-    	var productName = $scope.category.product.productMainCategory.name;
-    	switch(productName){
-    	case "Wall Primer":
-            code = "-1";
-            break;
-        case "Exterior Emulsion":
-            code = "-2";
-            break;
-        case "Interior Emulsion":
-            code = "-3";
-            break;
-        case "Apocolite Premium Enamel":
-            code = "-4";
-            break;
-        default:
-            break;
-    	}
-    	$http.get(basicurl + "/productcategory/" + code).then(function(response) {
-    	        $scope.products = response.data;
-    	 });
-    };
-
-    $scope.filterValue = function($event) {
-        if (isNaN(String.fromCharCode($event.keyCode))) {
-            $event.preventDefault();
-        }
-    };
-
-    $scope.isShown = function(color) {
-        return color === $scope.isnewproductcategory;
-    };
-    
-    $scope.isShownProductDD = function(color) {
-        return color === $scope.isnewproduct;
-    };
-
-    $scope.addProductInfo = function(code, type) {
-        var url = basicurl + "/add";
-        var data = angular.toJson($scope.category);
-        var config = {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-        $http.post(url, data, config)
-            .success(function(data, status, headers, config) {
-            	 if ($scope.file) {
-            	        $scope.upload($scope.file);
-            	      }
-                $location.url('/viewproduct/' + $scope.category.product.code + "/" + $scope.category.type);
-            })
-            .error(function(data, status, header, config) {
-
-            });
-    };
-    
-    //'Content-Type': 'multipart/form-data'
-    $scope.upload = function () {
-    	var file = $scope.file;
-    	Upload.upload({
-            url: basicurl+'/upload',
-            data: {file: file}
-        }).then(function (resp) {
-            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-        }, function (resp) {
-            console.log('Error status: ' + resp.status);
-        }, function (evt) {
-            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-        });
-    }
-});
-
 app.controller("allProductController", function($scope, $http, $log, $location) {
     $scope.selected = null;
     $http.get(basicurl + "/category/all").then(function(response) {
@@ -280,6 +197,86 @@ app.controller("limitedStockController", function($scope, $http, $log, $location
             $scope.categories = response.data;
         });
     };
+});
+
+app.controller("addProductController", function($scope, $http, $log, $location,Upload) {
+
+    $scope.selected = null;
+    $scope.color = 'dropdown';
+    
+    $http.get(basicurl + "/productsbyname/all").then(function(response) {
+        $scope.productcategories = response.data;
+    });
+    
+    $scope.populateProductName = function() {
+    	var productName = $scope.category.product.productMainCategory.name;
+    	switch(productName){
+    	case "Wall Primer":
+            code = "-1";
+            break;
+        case "Exterior Emulsion":
+            code = "-2";
+            break;
+        case "Interior Emulsion":
+            code = "-3";
+            break;
+        case "Apocolite Premium Enamel":
+            code = "-4";
+            break;
+        default:
+            break;
+    	}
+    	$http.get(basicurl + "/productcategory/" + code).then(function(response) {
+    	        $scope.products = response.data;
+    	 });
+    };
+
+    $scope.filterValue = function($event) {
+        if (isNaN(String.fromCharCode($event.keyCode))) {
+            $event.preventDefault();
+        }
+    };
+
+    $scope.isShown = function(color) {
+        return color === $scope.isnewproductcategory;
+    };
+    
+    $scope.isShownProductDD = function(color) {
+        return color === $scope.isnewproduct;
+    };
+
+    $scope.addProductInfo = function(code, type) {
+        var url = basicurl + "/add";
+        var data = angular.toJson($scope.category);
+        var config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        $http.post(url, data, config)
+            .success(function(data, status, headers, config) {
+                $location.url('/viewproduct/' + $scope.category.product.code + "/" + $scope.category.type);
+            })
+            .error(function(data, status, header, config) {
+
+            });
+    };
+    
+    $scope.uploadImage = function () {
+    	var file = $scope.file;
+    	Upload.upload({
+            url: basicurl+'/upload',
+            data: {file: file,}
+        }).then(function (resp) {
+        	$scope.category.imageUrl = resp.data;
+            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+        }, function (resp) {
+            console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        });
+    }
 });
 //<img ng-src="data:image/JPEG;base64,{{image}}">
 //https://murygin.wordpress.com/2014/10/13/rest-web-service-file-uploads-spring-boot/

@@ -1,6 +1,5 @@
 package com.stock.entity;
 
-import java.io.File;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -53,10 +52,7 @@ public class CategoryType {
 	
 	@Column(name="imageurl")
 	private String imageUrl;
-	
-	@Transient
-	private File image;
-		
+			
 	public CategoryType() {
 		super();
 	}
@@ -139,13 +135,5 @@ public class CategoryType {
 
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
-	}
-
-	public File getImage() {
-		return image;
-	}
-
-	public void setImage(File image) {
-		this.image = image;
 	}
 }
