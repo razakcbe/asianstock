@@ -356,15 +356,15 @@
 		<label class="control-label">Image <sup>*</sup></label>
 		<div class="controls">
 		 <div id="gallery" class="span3">
-			<input type="file" ng-model="file" name="file" accept="image/*" ngf-max-height="1000" ngf-select /><input class="btn btn-small btn-success" ng-click="uploadImage()"  type="submit" value="Upload" />
+			<input type="file" ng-model="file" name="file" accept="image/*" ngf-select required/><input class="btn btn-small btn-success" ng-click="uploadImage()"  type="submit" value="Upload" />
 		 </div>
 		</div>
 		</div>
 		<div class="control-group" ng-init="isnewproductcategory='dropdown'">
 			<label class="control-label" for="newproductcategory">Do you want to create new product category ?<sup>*</sup></label>
 			<div class="controls">
-			  <input type="radio" id="newproductcategory" ng-model="isnewproductcategory" value="dropdown"> Yes
-			  <input type="radio" id="newproductcategory" ng-model="isnewproductcategory" value="text"> No
+			  <input type="radio" id="newproductcategory" ng-model="isnewproductcategory" value="text"> Yes
+			  <input type="radio" id="newproductcategory" ng-model="isnewproductcategory" value="dropdown"> No
 			</div>
 		 </div>
 
@@ -379,22 +379,22 @@
 		<div class="control-group" ng-show="isShown('text')">
 			<label class="control-label" for="inputproductcategoryname">Product Category Name <sup>*</sup></label>
 			<div class="controls">
-			  <input type="text" id="inputproductcategoryname" ng-model="category.product.productMainCategory">
+			  <input type="text" id="inputproductcategoryname" ng-model="category.product.productMainCategory.name">
 			</div>
 		 </div>
 
 		<div class="control-group" ng-init="isnewproduct='DD'">
 			<label class="control-label" for="newproduct">Do you want to create new product ?<sup>*</sup></label>
 			<div class="controls">
-			  <input type="radio" id="newproduct" ng-model="isnewproduct" value="DD"> Yes
-			  <input type="radio" id="newproduct" ng-model="isnewproduct" value="TXT"> No
+			  <input type="radio" id="newproduct" ng-model="isnewproduct" value="TXT"> Yes
+			  <input type="radio" id="newproduct" ng-model="isnewproduct" value="DD"> No
 			</div>
 		 </div>
 
 		 <div class="control-group" ng-show="isShownProductDD('DD')">
 			<label class="control-label" for="inputproductname">Product name <sup>*</sup></label>
 			<div class="controls">
-			  <select class="srchTxt" id="inputproductname" ng-options="product for product in products" ng-model="category.product.name">
+			  <select class="srchTxt" id="inputproductname" required ng-options="product for product in products" ng-model="category.product.name">
         	</select>
 			</div>
 		 </div>
@@ -402,26 +402,26 @@
 		<div class="control-group" ng-show="isShownProductDD('TXT')">
 			<label class="control-label" for="inputproductname">Product name <sup>*</sup></label>
 			<div class="controls">
-			  <input type="text" id="inputproductname" ng-model="category.product.name">
+			  <input type="text" id="inputproductname" ng-model="category.product.name" required />
 			</div>
 		 </div>
 
 		 <div class="control-group">
 			<label class="control-label" for="inputproductcode">Product code <sup>*</sup></label>
 			<div class="controls">
-			  <input type="text" id="inputproductcode" ng-model="category.product.code">
+			  <input type="text" id="inputproductcode" ng-model="category.product.code" required>
 			</div>
 		 </div>
 		<div class="control-group">
 		<label class="control-label" for="inputvariant">Variant type<sup>*</sup></label>
 		<div class="controls">
-		  <input type="text" id="inputvariant" ng-model="category.type">
+		  <input type="text" id="inputvariant" ng-model="category.type" required>
 		</div>
 	  </div>	  
 	<div class="control-group">
 		<label class="control-label" for="inputquantity">Quantity Available <sup>*</sup></label>
 		<div class="controls">
-		  <input type="text" ng-keypress="filterValue($event)" id="inputquantity" ng-model="category.quantity">
+		  <input type="text" ng-keypress="filterValue($event)" id="inputquantity" ng-model="category.quantity" required>
 		</div>
 	  </div>	  
 		<div class="control-group">

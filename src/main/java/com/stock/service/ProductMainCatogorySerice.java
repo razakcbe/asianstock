@@ -10,4 +10,6 @@ public interface ProductMainCatogorySerice {
 	
 	ProductMainCategory getById(Long id);
 	
+	ProductMainCategory findByCode(String name);
+	
 }

@@ -58,4 +58,12 @@ public class Product {
 		this.name = name;
 	}
 
+	public ProductMainCategory getProductMainCategory() {
+		return productMainCategory;
+	}
+
+	public void setProductMainCategory(ProductMainCategory productMainCategory) {
+		this.productMainCategory = productMainCategory;
+	}
+
 }

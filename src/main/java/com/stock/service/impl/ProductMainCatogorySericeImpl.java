@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.stock.entity.Product;
 import com.stock.entity.ProductMainCategory;
 import com.stock.respository.ProductMainCategoryRepository;
 import com.stock.service.ProductMainCatogorySerice;
@@ -22,5 +23,10 @@ public class ProductMainCatogorySericeImpl implements ProductMainCatogorySerice 
 
 	public ProductMainCategory getById(Long id) {
 		return repository.getOne(id);
+	}
+
+	@Override
+	public ProductMainCategory findByCode(String name) {
+		return repository.findByName(name);
 	}
 }

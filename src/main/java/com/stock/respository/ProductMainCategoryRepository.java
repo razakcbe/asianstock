@@ -8,4 +8,5 @@ import com.stock.entity.ProductMainCategory;
 @Transactional
 public interface ProductMainCategoryRepository extends JpaRepository<ProductMainCategory, Long>{
 
+	ProductMainCategory findByName(String name);
 }
