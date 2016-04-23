@@ -1,6 +1,6 @@
 var app = angular.module('paintProducts', ['ngRoute','ngFileUpload']);
-//var basicurl = "https://asianstock.herokuapp.com/product";
-var basicurl = "http://localhost:8080/product";
+var basicurl = "https://asianstock.herokuapp.com/product";
+//var basicurl = "http://localhost:8080/product";
 
 
 app.config(['$routeProvider',
@@ -226,6 +226,7 @@ app.controller("addProductController", function($scope, $http, $log, $location,U
         default:
             break;
     	}
+    	
     	$http.get(basicurl + "/productcategory/" + code).then(function(response) {
     	        $scope.products = response.data;
     	 });
@@ -253,6 +254,7 @@ app.controller("addProductController", function($scope, $http, $log, $location,U
                 'Content-Type': 'application/json'
             }
         }
+        
         $http.post(url, data, config)
             .success(function(data, status, headers, config) {
                 $location.url('/viewproduct/' + $scope.category.product.code + "/" + $scope.category.type);

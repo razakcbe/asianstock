@@ -1,6 +1,5 @@
 package com.stock.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,7 +30,7 @@ public class Product {
 	@NotNull
 	private String name;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	ProductMainCategory productMainCategory;
 	
 	public Long getId() {
@@ -65,5 +64,4 @@ public class Product {
 	public void setProductMainCategory(ProductMainCategory productMainCategory) {
 		this.productMainCategory = productMainCategory;
 	}
-
 }

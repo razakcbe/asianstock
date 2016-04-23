@@ -115,31 +115,40 @@ public class ProductController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ResponseEntity<CategoryType> addProduct(@RequestBody CategoryType categorytype){
-		List<Product> productList = productService.findProductByName(categorytype.getProduct().getName());
-		ProductMainCategory category = productMainCatogorySericeImpl.findByCode(categorytype.getProduct().getProductMainCategory().getName());
-		if(productList == null){
-			Product product = new Product();
-			product.setProductMainCategory(category);
-			product = productService.save(categorytype.getProduct());	
-			categorytype.setProduct(product);
-			categorytype = categoryServiceImpl.save(categorytype);
-		}else{
-			boolean isNewCatRequired = true;
-			for(Product pro : productList){
-				if(pro.getCode().equals(categorytype.getProduct().getCode())){
-					categorytype.setProduct(pro);
-					categorytype = categoryServiceImpl.save(categorytype);
-					isNewCatRequired = false;
-				}
-			}
-			if(isNewCatRequired){
+		
+		
+		if(categorytype.getProduct().getProductMainCategory().getName() !=null){
+			ProductMainCategory category = productMainCatogorySericeImpl.findByCode(categorytype.getProduct().getProductMainCategory().getName());
+			List<Product> productList = productService.findProductByName(categorytype.getProduct().getName());
+			if(productList == null){
 				Product product = new Product();
 				product.setProductMainCategory(category);
-				product = productService.save(categorytype.getProduct());	
+				product.setName(categorytype.getProduct().getName());
+				product.setCode(categorytype.getProduct().getCode());
+				product = productService.save(product);
 				categorytype.setProduct(product);
 				categorytype = categoryServiceImpl.save(categorytype);
+			}else{
+				boolean isNewCatRequired = true;
+				for(Product pro : productList){
+					if(pro.getCode().equals(categorytype.getProduct().getCode())){
+						categorytype.setProduct(pro);
+						categorytype = categoryServiceImpl.save(categorytype);
+						isNewCatRequired = false;
+					}
+				}
+				if(isNewCatRequired){
+					Product product = new Product();
+					product.setProductMainCategory(category);
+					product = productService.save(categorytype.getProduct());	
+					categorytype.setProduct(product);
+					categorytype = categoryServiceImpl.save(categorytype);
+				}
+			
 			}
 		}
+		
+		
 		return new ResponseEntity<CategoryType>(categorytype, HttpStatus.OK);
 	}
 

@@ -379,7 +379,7 @@
 		<div class="control-group" ng-show="isShown('text')">
 			<label class="control-label" for="inputproductcategoryname">Product Category Name <sup>*</sup></label>
 			<div class="controls">
-			  <input type="text" id="inputproductcategoryname" ng-model="category.product.productMainCategory.name">
+			  <input type="text" id="inputproductcategoryname" ng-model="category.product.productMainCategory">
 			</div>
 		 </div>
 
