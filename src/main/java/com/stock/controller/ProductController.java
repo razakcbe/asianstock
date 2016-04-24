@@ -177,7 +177,11 @@ public class ProductController {
 		ServletContext sc = session.getServletContext();
 		String x = sc.getRealPath("/");
 		String fileName = uploadedFileRef.getOriginalFilename();
-		String path = x+fileName;
+		String path = null;
+		if (x!=null)
+			path = x+fileName;
+		else
+			path = fileName;
 		System.out.println("File Path"+path);
 		byte[] buffer = new byte[1000];
 		File outputFile = new File(path);
