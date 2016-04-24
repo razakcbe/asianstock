@@ -523,7 +523,7 @@
 <br class="clr"/>
 <div class="tab-content">
 <h3> Products Name <small class="pull-right"> {{categories.length}} products are available </small></h3>
-<div class="pull-right"><h5>Search : <input type="text" ng-blur="getProducts()" ng-keypress="filterValue($event)" id="inputquantity" ng-model="inputquantity" ng-init="50"></h5></div>
+<div class="pull-right"><h5>Input Quantity : <input type="text" ng-blur="getProducts()" ng-keypress="filterValue($event)" id="inputquantity" ng-model="inputquantity" ng-init="50"></h5></div>
 <br class="clr"/>
 	<div class="tab-pane  active" id="blockView">
 		<ul class="thumbnails">
