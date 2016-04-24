@@ -215,7 +215,6 @@ app.controller("limitedStockController", function($scope, $http, $log, $location
 });
 
 app.controller("addProductController", function($scope, $http, $log, $location,Upload) {
-
     $scope.selected = null;
     $scope.color = 'dropdown';
     
@@ -265,7 +264,6 @@ app.controller("addProductController", function($scope, $http, $log, $location,U
         var url = basicurl + "/add";
         $scope.category.imageurl = $scope.file.name;
         var data = angular.toJson($scope.category);
-        alert(data);
         var config = {
             headers: {
                 'Content-Type': 'application/json'
@@ -286,6 +284,7 @@ app.controller("addProductController", function($scope, $http, $log, $location,U
             url: basicurl+'/upload',
             data: {file: file,}
         }).then(function (resp) {
+        	//$scope.category.imageurl = resp.data;
             console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
         }, function (resp) {
             console.log('Error status: ' + resp.status);

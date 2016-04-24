@@ -358,8 +358,18 @@
     </ul>
 	<h3> Add Product</h3>	
 	<div class="well">
-	<form class="form-horizontal" >
+	<form class="form-horizontal">
 		<h4>Add Product Info</h4>
+	<!-- class="control-group">
+		<label class="control-label">Image <sup>*</sup></label>
+		<div class="controls">
+		 <div id="gallery" class="span3">
+            <a href={{category.imageurl}} title="{{category.imageurl}}">
+				<img ng-src={{category.imageurl}} style="height:150px; width:"150px" alt="{{category.imageurl}}"/>
+            </a>
+			</div>
+		</div>
+		</div> -->
 		<div class="control-group">
 		<label class="control-label">Image <sup>*</sup></label>
 		<div class="controls">
