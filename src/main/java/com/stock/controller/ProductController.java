@@ -178,6 +178,7 @@ public class ProductController {
 		String x = sc.getRealPath("/");
 		String fileName = uploadedFileRef.getOriginalFilename();
 		String path = x+fileName;
+		System.out.println("File Path"+path);
 		byte[] buffer = new byte[1000];
 		File outputFile = new File(path);
 		FileInputStream reader = null;
