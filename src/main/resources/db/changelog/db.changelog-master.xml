@@ -107,4 +107,12 @@
 		<sqlFile path="productsql/productmain.sql" encoding="utf8" dbms="postgresql"
 			splitStatements="false" relativeToChangelogFile="false" />
 	</changeSet>
+	
+		<changeSet id="changeimageurl" author="akabdulrazak">
+		<sql>
+		<![CDATA[
+		update categorytype set imageurl = 'defaultpaint.jpg';
+		]]>
+		</sql>
+	</changeSet>
 </databaseChangeLog>

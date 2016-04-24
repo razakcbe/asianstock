@@ -1,6 +1,6 @@
 var app = angular.module('paintProducts', ['ngRoute','ngFileUpload']);
-var basicurl = "https://asianstock.herokuapp.com/product";
-//var basicurl = "http://localhost:8080/product";
+//var basicurl = "https://asianstock.herokuapp.com/product";
+var basicurl = "http://localhost:8080/product";
 
 
 app.config(['$routeProvider',
@@ -248,13 +248,14 @@ app.controller("addProductController", function($scope, $http, $log, $location,U
 
     $scope.addProductInfo = function(code, type) {
         var url = basicurl + "/add";
+        $scope.category.imageurl = $scope.file.name;
         var data = angular.toJson($scope.category);
+        alert(data);
         var config = {
             headers: {
                 'Content-Type': 'application/json'
             }
         }
-        
         $http.post(url, data, config)
             .success(function(data, status, headers, config) {
                 $location.url('/viewproduct/' + $scope.category.product.code + "/" + $scope.category.type);
@@ -270,7 +271,6 @@ app.controller("addProductController", function($scope, $http, $log, $location,U
             url: basicurl+'/upload',
             data: {file: file,}
         }).then(function (resp) {
-        	$scope.category.imageUrl = resp.data;
             console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
         }, function (resp) {
             console.log('Error status: ' + resp.status);

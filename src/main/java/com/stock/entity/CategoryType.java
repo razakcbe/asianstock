@@ -51,7 +51,7 @@ public class CategoryType {
 	private Date lastUpdateTime;
 	
 	@Column(name="imageurl")
-	private String imageUrl;
+	private String imageurl;
 			
 	public CategoryType() {
 		super();
@@ -129,11 +129,11 @@ public class CategoryType {
 		this.lastUpdateTime = lastUpdateTime;
 	}
 
-	public String getImageUrl() {
-		return imageUrl;
+	public String getImageurl() {
+		return imageurl;
 	}
 
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
+	public void setImageurl(String imageurl) {
+		this.imageurl = imageurl;
 	}
 }

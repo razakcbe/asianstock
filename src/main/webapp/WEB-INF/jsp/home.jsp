@@ -147,7 +147,7 @@
 			  <li class="span3" ng-repeat="category in categories | orderBy:'quantity':false"">
 				  <div class="thumbnail">
 				  <i class="tag"></i>
-					<a ng-click="viewproduct(category.product.code,category.type)"><img src="defaultpaint.jpg" alt=""></a>
+					<a ng-click="viewproduct(category.product.code,category.type)"><img ng-src={{category.imageurl}} style="height:150px; width: "150px" alt=""></a>
 					<div class="caption">
 					  <h5>{{category.product.name}}</h5>
 					  <small>{{category.product.code}} - {{category.type}}</small>
@@ -178,7 +178,7 @@
 		<div ng-repeat="category in categories | filter:searchText">
 		<div class="row">	  
 			<div class="span2">
-				<img src="defaultpaint.jpg" alt=""/>
+				<img ng-src={{category.imageurl}} style="height:150px; width: "150px" alt=""/>
 			</div>
 			<div class="span4">
 				<h3>{{category.type}}</h3>				
@@ -203,7 +203,7 @@
 		
 		<li class="span3" ng-repeat="category in categories | filter:searchText |orderBy:'quantity':false">
 			  <div class="thumbnail">
-				<a href="#"><img src="defaultpaint.jpg" alt=""/></a>
+				<a><img ng-src={{category.imageurl}} style="height:150px; width: "150px" alt=""/></a>
 				<div class="caption">
 				  <h5>{{category.product.name}}</h5>
 				  <p> 
@@ -229,8 +229,8 @@
     </ul>
 	<div class="row">	  
 			<div id="gallery" class="span3">
-            <a href="defaultpaint.jpg" title="Asian Paint">
-				<img src="defaultpaint.jpg" style="width:100%" alt="Asian Paint"/>
+            <a href="" title="Asian Paint">
+				<img ng-src={{category.imageurl}} style="height:150px; width: "150px" alt="Asian Paint"/>
             </a>
 			</div>
 			<div class="span6">
@@ -292,7 +292,7 @@
 		<div class="controls">
 		 <div id="gallery" class="span3">
             <a href="defaultpaint.jpg" title="Asian Paint">
-				<img src="defaultpaint.jpg" style="width:100%;height:30%"  alt="Asian Paint"/>
+				<img ng-src={{category.imageurl}} style="width:100%;height:30%"  alt="Asian Paint"/>
             </a>
 			</div>
 		</div>
@@ -356,7 +356,7 @@
 		<label class="control-label">Image <sup>*</sup></label>
 		<div class="controls">
 		 <div id="gallery" class="span3">
-			<input type="file" ng-model="file" name="file" accept="image/*" ngf-select required/><input class="btn btn-small btn-success" ng-click="uploadImage()"  type="submit" value="Upload" />
+			<input type="file" ng-model="file" name="file" accept="image/*" ngf-select ng-required ngf-resize="{width: 150, height: 150}"/><input class="btn btn-small btn-success" ng-click="uploadImage()"  type="submit" value="Upload" /><input type="hidden" ng-model="category.imageurl">
 		 </div>
 		</div>
 		</div>
@@ -452,8 +452,6 @@
 		<li class="active">Products Name</li>
     </ul>  
  <!-- <div id="myTab" class="pull-right">
- <a href="#" data-toggle="tab"><span class="btn btn-large"><i class="icon-list"></i></span></a>
- <a href="#" data-toggle="tab"><span class="btn btn-large btn-primary"><i class="icon-th-large"></i></span></a>
 </div> -->
 <br class="clr"/>
 <div class="tab-content">
@@ -465,7 +463,7 @@
 		
 		<li class="span3" ng-repeat="category in categories | filter:searchText | orderBy:'quantity':false">
 			  <div class="thumbnail">
-				<a href="#"><img src="defaultpaint.jpg" alt=""/></a>
+				<a><img ng-src={{category.imageurl}} style="height:150px; width: "150px" alt=""/></a>
 				<div class="caption">
 				  <h5>{{category.product.name}}</h5>
 				  <p> 
@@ -499,7 +497,7 @@
 		
 		<li class="span3" ng-repeat="product in products | filter:searchText">
 			  <div class="thumbnail">
-				<a href="#"><img src="defaultpaint.jpg" alt=""/></a>
+				<a><img src="defaultpaint.jpg" alt=""/></a>
 				<div class="caption">
 				  <h5>{{product.name}}</h5>
 				  <p> 
@@ -532,7 +530,7 @@
 		
 		<li class="span3" ng-repeat="category in categories | filter:searchText | orderBy:'quantity':false">
 			  <div class="thumbnail">
-				<a href="#"><img src="defaultpaint.jpg" alt=""/></a>
+				<a><img ng-src={{category.imageurl}} style="height:150px; width: "150px" alt=""/></a>
 				<div class="caption">
 				  <h5>{{category.product.name}}</h5>
 				  <p> 

@@ -4,9 +4,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -115,8 +121,8 @@ public class ProductController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ResponseEntity<CategoryType> addProduct(@RequestBody CategoryType categorytype){
-		
-		
+
+
 		if(categorytype.getProduct().getProductMainCategory().getName() !=null){
 			ProductMainCategory category = productMainCatogorySericeImpl.findByCode(categorytype.getProduct().getProductMainCategory().getName());
 			List<Product> productList = productService.findProductByName(categorytype.getProduct().getName());
@@ -127,12 +133,16 @@ public class ProductController {
 				product.setCode(categorytype.getProduct().getCode());
 				product = productService.save(product);
 				categorytype.setProduct(product);
+				categorytype.setLastUpdateTime(new Date());
+				categorytype.setVatPercentage("14.5");
 				categorytype = categoryServiceImpl.save(categorytype);
 			}else{
 				boolean isNewCatRequired = true;
 				for(Product pro : productList){
 					if(pro.getCode().equals(categorytype.getProduct().getCode())){
 						categorytype.setProduct(pro);
+						categorytype.setLastUpdateTime(new Date());
+						categorytype.setVatPercentage("14.5");
 						categorytype = categoryServiceImpl.save(categorytype);
 						isNewCatRequired = false;
 					}
@@ -142,48 +152,37 @@ public class ProductController {
 					product.setProductMainCategory(category);
 					product = productService.save(categorytype.getProduct());	
 					categorytype.setProduct(product);
+					categorytype.setLastUpdateTime(new Date());
+					categorytype.setVatPercentage("14.5");
 					categorytype = categoryServiceImpl.save(categorytype);
 				}
-			
+
 			}
 		}
-		
-		
+
+
 		return new ResponseEntity<CategoryType>(categorytype, HttpStatus.OK);
 	}
 
 
+	@SuppressWarnings("unused")
 	@RequestMapping(value = "/upload",method = RequestMethod.POST,produces = "text/plain; charset=utf-8")
 	public String uploadFile(
-			@RequestParam("file") MultipartFile uploadedFileRef) {
-		// Get name of uploaded file.
+			@RequestParam("file") MultipartFile uploadedFileRef,HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		ServletContext sc = session.getServletContext();
+		String x = sc.getRealPath("/");
 		String fileName = uploadedFileRef.getOriginalFilename();
-
-		// Path where the uploaded file will be stored.
-		String path = "E:/asianstock/" + fileName;
-
-		// This buffer will store the data read from 'uploadedFileRef'
+		String path = x+fileName;
 		byte[] buffer = new byte[1000];
-
-		// Now create the output file on the server.
 		File outputFile = new File(path);
-
 		FileInputStream reader = null;
 		FileOutputStream writer = null;
-		@SuppressWarnings("unused")
 		int totalBytes = 0;
 		try {
 			outputFile.createNewFile();
-
-			// Create the input stream to uploaded file to read data from it.
 			reader = (FileInputStream) uploadedFileRef.getInputStream();
-
-			// Create writer for 'outputFile' to write data read from
-			// 'uploadedFileRef'
 			writer = new FileOutputStream(outputFile);
-
-			// Iteratively read data from 'uploadedFileRef' and write to
-			// 'outputFile';            
 			int bytesRead = 0;
 			while ((bytesRead = reader.read(buffer)) != -1) {
 				writer.write(buffer);
@@ -199,7 +198,6 @@ public class ProductController {
 				e.printStackTrace();
 			}
 		}
-
 		return fileName;
 	}
 
