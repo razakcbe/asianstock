@@ -65,7 +65,11 @@ public class ProductController {
 	public ResponseEntity<CategoryType> updateCategoryType(@PathVariable String code,@RequestBody CategoryType categorytype){
 		Product product = productService.findByCode(code);
 		CategoryType cate = categoryServiceImpl.findByProductAndCategoryType(product.getId(), categorytype.getType());
-		categoryServiceImpl.updateStockAndPrice(cate.getId(), categorytype.getQuantity(), categorytype.getPrice());
+		cate.setImageurl(categorytype.getImageurl());
+		cate.setLastUpdateTime(new Date());
+		cate.setQuantity(categorytype.getQuantity());
+		cate.setPrice(categorytype.getPrice());
+		categoryServiceImpl.save(cate);
 		return new ResponseEntity<CategoryType>(cate, HttpStatus.OK);
 	}
 

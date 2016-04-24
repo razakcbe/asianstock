@@ -291,10 +291,18 @@
 		<label class="control-label">Image <sup>*</sup></label>
 		<div class="controls">
 		 <div id="gallery" class="span3">
-            <a href="defaultpaint.jpg" title="Asian Paint">
-				<img ng-src={{category.imageurl}} style="width:100%;height:30%"  alt="Asian Paint"/>
+            <a href={{category.imageurl}} title="Asian Paint">
+				<img ng-src={{category.imageurl}} style="height:150px; width:"150px" alt="Asian Paint"/>
             </a>
 			</div>
+		</div>
+		</div>
+		<div class="control-group">
+		<label class="control-label">Image <sup>*</sup></label>
+		<div class="controls">
+		 <div id="gallery" class="span3">
+			<input type="file" ng-model="file" name="file" accept="image/*" ngf-select ng-required ngf-resize="{width: 150, height: 150}"/><input class="btn btn-small btn-success" ng-click="uploadImage()"  type="submit" value="Upload" /><input type="hidden" ng-model="category.imageurl">
+		 </div>
 		</div>
 		</div>
 		<div class="control-group">
@@ -463,7 +471,7 @@
 		
 		<li class="span3" ng-repeat="category in categories | filter:searchText | orderBy:'quantity':false">
 			  <div class="thumbnail">
-				<a><img ng-src={{category.imageurl}} style="height:150px; width: "150px" alt=""/></a>
+				<a><img ng-src={{category.imageurl}} style="height:150px; width:"150px" alt=""/></a>
 				<div class="caption">
 				  <h5>{{category.product.name}}</h5>
 				  <p> 

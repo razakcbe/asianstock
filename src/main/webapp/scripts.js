@@ -1,6 +1,6 @@
 var app = angular.module('paintProducts', ['ngRoute','ngFileUpload']);
-//var basicurl = "https://asianstock.herokuapp.com/product";
-var basicurl = "http://localhost:8080/product";
+var basicurl = "https://asianstock.herokuapp.com/product";
+//var basicurl = "http://localhost:8080/product";
 
 
 app.config(['$routeProvider',
@@ -74,7 +74,7 @@ app.controller("categoryLastUpdatedController", function($scope, $http, $log, $l
 });
 
 
-app.controller("categoryTypeController", function($scope, $http, $log, $routeParams, $location) {
+app.controller("categoryTypeController", function($scope, $http, $log, $routeParams, $location,Upload) {
     var url = basicurl + "/category/" + $routeParams.productCode + "/" + $routeParams.categoryType;
     $http.get(url).then(function(response) {
         $scope.category = response.data;
@@ -95,6 +95,21 @@ app.controller("categoryTypeController", function($scope, $http, $log, $routePar
 
             });
     };
+    
+    $scope.uploadImage = function () {
+    	var file = $scope.file;
+    	Upload.upload({
+            url: basicurl+'/upload',
+            data: {file: file,}
+        }).then(function (resp) {
+        	$scope.category.imageurl = resp.data;
+            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+        }, function (resp) {
+            console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+        });
+    }
 });
 
 app.controller("categoriesController", function($scope, $http, $routeParams, $location) {
