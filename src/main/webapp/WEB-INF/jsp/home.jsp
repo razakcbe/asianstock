@@ -151,7 +151,7 @@
 					<div class="caption">
 					  <h5>{{category.product.name}}</h5>
 					  <small>{{category.product.code}} - {{category.type}}</small>
-					  <h4><a class="btn" ng-click="viewproduct(category.product.code,category.type)" >VIEW</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-primary" href="#">&#8377;{{category.price}}</a></h4>
+					  <h4><a class="btn" ng-click="viewproduct(category.product.code,category.type)" >VIEW</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-primary">&#8377;{{category.price}}</a></h4>
 					</div>
 				  </div>
 				</li>
@@ -190,7 +190,7 @@
 			</div>
 			<div class="span3 alignR">
 			<h3>&#8377;{{category.price}}</h3>
-			 <a href="#" class="btn btn-large btn-primary"> Update <i class=" icon-shopping-cart"></i></a>
+			 <a class="btn btn-large btn-primary"> Update <i class=" icon-shopping-cart"></i></a>
 			  <a ng-click="viewproduct(category.product.code,category.type)" class="btn btn-large">View<i class="icon-zoom-in"></i></a>
 			</div>
 		</div>
@@ -209,7 +209,7 @@
 				  <p> 
 					{{category.product.code}} - {{category.type}}
 				  </p>
-				   <h4 style="text-align:center"><a class="btn" ng-click="viewproduct(category.product.code,category.type)"> <i class="icon-zoom-in"></i></a> <a class="btn" ng-click="updateproduct(category.product.code,category.type)">Update <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&#8377;{{category.price}}</a></h4>
+				   <h4 style="text-align:center"><a class="btn" ng-click="viewproduct(category.product.code,category.type)"> <i class="icon-zoom-in"></i></a> <a class="btn" ng-click="updateproduct(category.product.code,category.type)">Update <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" >&#8377;{{category.price}}</a></h4>
 				</div>
 			  </div>
 			</li>
@@ -472,7 +472,7 @@
 					{{category.product.code}} - {{category.type}}</br>
 					<b>{{category.quantity}} items in stock</b>
 				  </p>
-				   <h4 style="text-align:center"><a class="btn" ng-click="viewproduct(category.product.code,category.type)"> <i class="icon-zoom-in"></i></a> <a class="btn" ng-click="updateproduct(category.product.code,category.type)">Update <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&#8377;{{category.price}}</a></h4>
+				   <h4 style="text-align:center"><a class="btn" ng-click="viewproduct(category.product.code,category.type)"> <i class="icon-zoom-in"></i></a> <a class="btn" ng-click="updateproduct(category.product.code,category.type)">Update <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary">&#8377;{{category.price}}</a></h4>
 				</div>
 			  </div>
 			</li>
@@ -539,7 +539,7 @@
 					{{category.product.code}} - {{category.type}}</br>
 					<b>{{category.quantity}} items in stock</b>
 				  </p>
-				   <h4 style="text-align:center"><a class="btn" ng-click="viewproduct(category.product.code,category.type)"> <i class="icon-zoom-in"></i></a> <a class="btn" ng-click="updateproduct(category.product.code,category.type)">Update <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&#8377;{{category.price}}</a></h4>
+				   <h4 style="text-align:center"><a class="btn" ng-click="viewproduct(category.product.code,category.type)"> <i class="icon-zoom-in"></i></a> <a class="btn" ng-click="updateproduct(category.product.code,category.type)">Update <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" >&#8377;{{category.price}}</a></h4>
 				</div>
 			  </div>
 			</li>
