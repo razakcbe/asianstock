@@ -378,15 +378,16 @@
 		 </div>
 		</div>
 		</div>
-		<div class="control-group" ng-init="isnewproductcategory='dropdown'">
+		<!--<div class="control-group" ng-init="isnewproductcategory='dropdown'">
 			<label class="control-label" for="newproductcategory">Do you want to create new product category ?<sup>*</sup></label>
 			<div class="controls">
 			  <input type="radio" id="newproductcategory" ng-model="isnewproductcategory" value="text"> Yes
 			  <input type="radio" id="newproductcategory" ng-model="isnewproductcategory" value="dropdown"> No
 			</div>
-		 </div>
+		 </div>-->
 
-		<div class="control-group" ng-show="isShown('dropdown')">
+		<!--<div class="control-group" ng-show="isShown('dropdown')"> -->
+		<div class="control-group" >
 			<label class="control-label" for="inputproductcategoryname">Product Category Name <sup>*</sup></label>
 			<div class="controls">
 			  <select class="srchTxt" id="inputproductcategoryname" ng-change="populateProductName()"  ng-options="productcategory.name for productcategory in productcategories" ng-model="category.product.productMainCategory">
@@ -394,12 +395,12 @@
 			</div>
 		 </div>
 	
-		<div class="control-group" ng-show="isShown('text')">
+		<!--<div class="control-group" ng-show="isShown('text')">
 			<label class="control-label" for="inputproductcategoryname">Product Category Name <sup>*</sup></label>
 			<div class="controls">
 			  <input type="text" id="inputproductcategoryname" ng-model="category.product.productMainCategory">
 			</div>
-		 </div>
+		 </div>-->
 
 		<div class="control-group" ng-init="isnewproduct='DD'">
 			<label class="control-label" for="newproduct">Do you want to create new product ?<sup>*</sup></label>
